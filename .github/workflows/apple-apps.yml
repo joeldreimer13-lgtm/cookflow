@@ -1,0 +1,55 @@
+name: CookFlow Apple apps
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - CookFlowApple.zip
+      - .github/workflows/apple-apps.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cookflow-apple-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Unpack source project
+        run: ditto -x -k CookFlowApple.zip .
+      - name: Show Apple toolchain
+        run: |
+          xcodebuild -version
+          xcodebuild -showsdks
+          xcodebuild -list -project CookFlowApple/CookFlowApple.xcodeproj
+      - name: Test merging, offline changes, and backup format
+        working-directory: CookFlowApple
+        run: |
+          mkdir -p artifacts
+          swift test --package-path Core 2>&1 | tee artifacts/core-tests.log
+      - name: Compile iPhone app and embedded Watch app
+        working-directory: CookFlowApple
+        run: |
+          xcodebuild -project CookFlowApple.xcodeproj -scheme CookFlow -configuration Debug -destination 'generic/platform=iOS Simulator' -derivedDataPath Build CODE_SIGNING_ALLOWED=NO build 2>&1 | tee artifacts/iphone-build.log
+      - name: Compile Watch app
+        working-directory: CookFlowApple
+        run: |
+          xcodebuild -project CookFlowApple.xcodeproj -scheme CookFlowWatch -configuration Debug -destination 'generic/platform=watchOS Simulator' -derivedDataPath Build CODE_SIGNING_ALLOWED=NO build 2>&1 | tee artifacts/watch-build.log
+      - name: Capture Watch preview when a runtime is available
+        continue-on-error: true
+        run: bash CookFlowApple/scripts/capture_preview.sh
+      - name: Save build logs and available screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: CookFlow-Apple-checks
+          path: CookFlowApple/artifacts
+          if-no-files-found: warn
+          retention-days: 14
