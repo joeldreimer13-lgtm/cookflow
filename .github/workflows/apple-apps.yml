@@ -7,6 +7,10 @@ on:
       - CookFlowApple.zip
       - .github/workflows/apple-apps.yml
 
+defaults:
+  run:
+    shell: bash
+
 permissions:
   contents: read
 
