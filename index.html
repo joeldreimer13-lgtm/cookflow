@@ -7,9 +7,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="CookFlow">
-  <meta name="description" content="Paste any recipe, tick off steps, and see your cooking progress. Your checklist saves automatically on this device.">
+  <meta name="description" content="Shop by store, check off groceries, and follow your recipes with live progress bars. Your lists save automatically on this device.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232c7158'/%3E%3Cpath d='M13 32 26 44 51 18' stroke='white' stroke-width='7' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-  <title>CookFlow · Your cooking checklist</title>
+  <title>CookFlow · Shop and cook</title>
   <style>
     :root{--ink:#24312b;--muted:#69746d;--line:#e0e5dd;--cream:#f7f6f0;--white:#fff;--green:#2c7158;--green-dark:#1c5b45;--soft-green:#e7f2e9;--gold:#e9a950;--shadow:0 16px 35px rgba(37,61,43,.065);color-scheme:light}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}button,input,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #b0d5be;outline-offset:2px}button:disabled{cursor:not-allowed;opacity:.5}.hidden{display:none!important}
@@ -25,6 +25,10 @@
     .bottom-actions{display:flex;flex-wrap:wrap;gap:9px;justify-content:space-between;padding:17px 2px 0}.tip{font-size:12px;color:#849187;text-align:center;margin-top:23px;line-height:1.65}.tip strong{color:#5b6f60}
     dialog{border:none;border-radius:23px;padding:0;width:min(700px,calc(100% - 18px));max-height:min(90dvh,920px);box-shadow:0 22px 90px #10261c75;background:#fff;color:var(--ink)}dialog::backdrop{background:#111f19a8;backdrop-filter:blur(3px)}.modal-content{padding:23px 24px 24px;max-height:90dvh;overflow:auto}.modal-top{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}.modal-top h2{margin:0 0 5px;font-size:23px;letter-spacing:-.6px}.modal-top p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}.close{border:none;background:#f2f4ef;border-radius:11px;height:37px;width:37px;display:grid;place-items:center;color:var(--ink);flex-shrink:0}.field-label{display:block;font-size:12px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:#657168;margin:20px 0 8px}input[type=text],textarea{border:1px solid #cfd8ce;width:100%;background:#fbfcfa;color:var(--ink);border-radius:13px;padding:13px 14px;font-size:16px;outline:none}input[type=text]:focus,textarea:focus{border-color:#559c74;box-shadow:0 0 0 3px #e1f1e5}textarea{min-height:220px;line-height:1.5;resize:vertical}.hint{font-size:12px;color:var(--muted);line-height:1.55;margin:10px 0 0}.hint code{font-size:11px;background:#edf3e9;padding:2px 4px;border-radius:4px}.import-preview{margin:15px 0 0;background:#f3f7ef;border:1px solid #e2ebe0;border-radius:11px;padding:11px 13px;color:#52715c;font-size:13px}.modal-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.modal-actions .button:first-child{flex:1}.danger-zone{margin-top:19px;border-top:1px solid #edf0ea;padding-top:15px;display:flex;justify-content:space-between;align-items:center;gap:10px}.danger-zone p{font-size:12px;color:var(--muted);margin:0}.toast{position:fixed;bottom:calc(env(safe-area-inset-bottom) + 20px);left:50%;transform:translateX(-50%) translateY(100px);opacity:0;background:#24352a;color:white;padding:11px 17px;border-radius:13px;z-index:30;box-shadow:0 10px 35px #1b2d2660;font-size:13px;font-weight:600;pointer-events:none;transition:transform .3s,opacity .3s;max-width:calc(100% - 32px);text-align:center}.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
     @media(max-width:560px){.shell{padding-left:14px;padding-right:14px}.welcome h1{font-size:35px}.progress-card{padding:18px;top:6px}.percentage{font-size:38px}.modal-content{padding:22px 17px}.toolbar-actions .button{padding:9px 11px}.button.small{font-size:12px}.step-text{font-size:15px}.current-indicator{display:none}.phase-head{padding:15px}.phase-content{padding:5px 8px 10px}}
+    select{font:inherit}select:focus-visible{outline:3px solid #b0d5be;outline-offset:2px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .shopping-panel{margin:2px 0 29px;border:1px solid #dbe3d3;border-radius:22px;background:#edf3e7;box-shadow:var(--shadow)}.shopping-summary{position:sticky;top:10px;z-index:16;background:#edf3e7;border-radius:21px 21px 0 0;padding-bottom:15px;box-shadow:0 9px 16px #293f1910}.shopping-panel.is-collapsed .shopping-summary{border-radius:21px;box-shadow:none}.shopping-summary h2{margin:0}.shopping-toggle{border:0;background:transparent;color:var(--ink);width:100%;display:flex;align-items:center;gap:12px;text-align:left;padding:17px 18px 12px;border-radius:21px}.shop-bag{width:42px;height:42px;background:#f4e5c6;display:grid;place-items:center;border-radius:13px;color:#806229;flex:none}.shop-bag .icon{width:23px;height:23px}.shop-summary-copy{flex:1;min-width:0}.shop-title{font-size:22px;font-weight:850;letter-spacing:-.7px;display:block}.shop-summary-count{font-size:12px;font-weight:500;color:#68735e;display:block;margin-top:4px;line-height:1.4}.shop-percent{font-size:31px;font-weight:850;letter-spacing:-1.5px;font-variant-numeric:tabular-nums}.shop-chevron{transition:transform .2s}.shopping-panel.is-collapsed .shop-chevron{transform:rotate(-90deg)}.shopping-meter{height:7px;border-radius:20px;background:#d9e2cf;overflow:hidden;margin:0 18px}.shopping-meter-fill{height:100%;width:0;background:linear-gradient(90deg,#a5b96e,#deb35b);border-radius:inherit;transition:width .35s ease}.shopping-body{padding:17px 15px 15px}.shopping-body[hidden],.shop-store-body[hidden]{display:none}.shop-intro{color:var(--muted);font-size:13px;line-height:1.5;margin:0 0 13px}.shop-quick-add{display:grid;grid-template-columns:minmax(0,1fr) minmax(110px,145px) auto;gap:8px;align-items:center}.shop-quick-add input{min-width:0;background:#fff}.shop-select{border:1px solid #cfd8ce;border-radius:12px;padding:12px 30px 12px 12px;font-size:15px;color:var(--ink);background:#fff;width:100%;min-width:0;min-height:46px}.shop-quick-add .button{min-height:46px;white-space:nowrap;padding:10px 14px}.shop-tools{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin:10px 0 7px}.shop-tools .button{font-size:12px;padding:7px 9px;min-height:40px}.shop-feedback{display:flex;justify-content:space-between;gap:8px;align-items:center;min-height:35px;margin:0 2px 10px;color:#6b765f;font-size:12px;line-height:1.5}.shop-feedback .button{flex:none;min-height:36px;font-size:12px}.shop-stores{display:grid;gap:11px}.shop-store{border:1px solid #dfe5d9;background:white;border-radius:17px;overflow:hidden}.shop-store-header{display:flex;align-items:center;gap:4px;padding:3px 7px 3px 2px}.shop-store-toggle{flex:1;min-width:0;display:flex;align-items:center;gap:9px;border:0;background:transparent;color:var(--ink);padding:12px 10px;text-align:left}.shop-store-chevron{width:16px;height:16px;color:#78876b;transition:transform .2s}.shop-store.closed .shop-store-chevron{transform:rotate(-90deg)}.shop-store-name{display:block;font-size:16px;font-weight:800;overflow-wrap:anywhere}.shop-store-count{display:block;margin-top:3px;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}.shop-store-bar{height:3px;background:#eef1e7}.shop-store-bar span{height:100%;display:block;background:#d4ac56;transition:width .3s}.shop-icon-button{width:38px;min-width:38px;height:44px;border:0;border-radius:10px;display:grid;place-items:center;background:transparent;color:#8a9785}.shop-icon-button:hover{background:#f1f5ec;color:var(--green)}.shop-icon-button.delete:hover{color:#a23c33;background:#fdf0eb}.shop-icon-button .icon{width:16px;height:16px}.shop-item-list{list-style:none;padding:4px 8px 0;margin:0}.shop-item{display:flex;align-items:flex-start;gap:0;border-bottom:1px solid #f0f2ec;padding:2px 0}.shop-item:last-child{border-bottom:0}.shop-item-label{display:flex;gap:10px;align-items:flex-start;flex:1;min-width:0;padding:10px 4px 10px 5px;cursor:pointer;position:relative;border-radius:9px}.shop-item-label:focus-within{outline:2px solid #a7c798;outline-offset:-1px}.shop-item-label input{position:absolute;opacity:0;width:1px;height:1px}.shop-check{width:25px;height:25px;flex:0 0 25px;display:grid;place-items:center;border:2px solid #cfd8c7;border-radius:50%;background:white;transition:background .15s,border .15s}.shop-check svg{width:16px;height:16px;stroke:white;stroke-width:3;fill:none;opacity:0}.shop-item.completed .shop-check{background:#c9a147;border-color:#c9a147}.shop-item.completed .shop-check svg{opacity:1}.shop-item-text{font-size:15px;line-height:1.5;overflow-wrap:anywhere;padding-top:1px}.shop-item.completed .shop-item-text{color:#8b9585;text-decoration:line-through}.shop-item-actions{display:flex;align-items:center;padding-top:1px}.shop-store-add{width:calc(100% - 18px);border:0;background:transparent;color:var(--green);font-size:13px;font-weight:700;min-height:44px;text-align:left;padding:10px 9px;margin:2px 9px 6px;border-radius:10px}.shop-store-add:hover{background:#f2f6ed}.shop-store-empty{font-size:13px;color:#8b9684;margin:14px 17px 3px;line-height:1.5}.shop-empty-list{border:1px dashed #becdb3;padding:24px 18px;text-align:center;border-radius:15px;color:#6b765f;font-size:14px;line-height:1.6}.shop-modal-form{margin:0}.shop-modal-form .shop-select{margin-top:0}.shop-modal-form .field-label{margin-top:17px}.shop-modal-form .danger-zone{align-items:flex-start}.shop-modal-form .danger-zone .button{flex:none}.shop-paste-help{margin:13px 0 0;font-size:13px;line-height:1.6;color:var(--muted)}.shop-paste-help code{background:#edf3e9;padding:2px 5px;border-radius:5px}.shop-paste-text{min-height:210px}.shop-inline-error{color:#9e3d30;font-size:13px;line-height:1.5;margin:10px 0 0}.shop-cooking-divider{display:flex;align-items:center;gap:12px;margin:0 0 20px;color:#819078;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.shop-cooking-divider:after{content:"";height:1px;flex:1;background:var(--line)}
+    .shop-store-add-form{display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:7px;align-items:center;padding:10px 12px 12px}.shop-store-add-form input{min-width:0;background:#f8faf5;padding:11px 12px}.shop-store-add-form .button{min-height:44px;padding:8px;font-size:22px;border-radius:12px}
+    @media(max-width:560px){.shopping-summary{top:6px}.shopping-toggle{padding:15px 13px 12px;gap:9px}.shop-title{font-size:21px}.shop-bag{width:36px;height:40px}.shop-percent{font-size:29px}.shop-chevron{width:16px;height:16px}.shopping-meter{margin-left:14px;margin-right:14px}.shopping-body{padding:15px 10px 11px}.shop-quick-add{grid-template-columns:minmax(0,1fr) auto}.shop-quick-add input{grid-column:1/-1}.shop-quick-add .button{padding:10px 17px}.shop-select{font-size:16px}.shop-icon-button{width:36px;min-width:36px}.shop-item-list{padding-left:5px;padding-right:4px}.shop-item-label{gap:9px;padding-left:5px;padding-right:3px}.shop-item-text{font-size:15px}.shop-feedback{font-size:11px}.shopping-panel{margin-bottom:25px}.shop-tools{gap:0}.shop-tools .button{padding-left:8px;padding-right:8px}.shop-store-add-form{padding-left:10px;padding-right:10px}}
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
   </style>
 </head>
@@ -38,6 +42,28 @@
       <button class="button secondary small" id="editTop" type="button"><svg class="icon" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L9 17l-4 1 1-4Z"/></svg> Paste steps</button>
     </header>
 
+    <section class="shopping-panel" id="shoppingPanel" aria-labelledby="shoppingTitle">
+      <div class="shopping-summary">
+        <h2><button type="button" class="shopping-toggle" id="shoppingToggle" aria-expanded="true" aria-controls="shoppingBody">
+          <span class="shop-bag" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></span>
+          <span class="shop-summary-copy"><span class="shop-title" id="shoppingTitle">Shopping list</span><span class="shop-summary-count" id="shoppingCount">Your next grocery run</span></span>
+          <span class="shop-percent" id="shoppingPercent">0%</span><svg class="icon shop-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button></h2>
+        <div class="shopping-meter" role="progressbar" id="shoppingMeter" aria-label="Shopping items bought" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="shopping-meter-fill" id="shoppingFill"></div></div>
+      </div>
+      <div class="shopping-body" id="shoppingBody">
+        <p class="shop-intro">Plan by store. Check things off as they go in your cart.</p>
+        <form id="shoppingAddForm" class="shop-quick-add" aria-label="Quick add shopping item">
+          <label class="sr-only" for="shoppingNewItem">Shopping item</label><input type="text" id="shoppingNewItem" placeholder="What do you need?" maxlength="240" autocomplete="off" required>
+          <label class="sr-only" for="shoppingStoreSelect">Store for new item</label><select class="shop-select" id="shoppingStoreSelect"></select>
+          <button class="button" id="shoppingQuickAdd" type="submit">+ Add item</button>
+        </form>
+        <div class="shop-tools"><button type="button" class="button ghost small" id="shoppingAddStore">+ Add store</button><button type="button" class="button ghost small" id="shoppingPasteButton">Paste a list</button><button type="button" class="button ghost small" id="shoppingReset">Reset checks</button></div>
+        <div class="shop-feedback"><span id="shoppingMessage" role="status" aria-live="polite">Saved automatically on this device.</span><button type="button" class="button secondary small hidden" id="shoppingUndo">Undo</button></div>
+        <div class="shop-stores" id="shoppingStores"></div>
+      </div>
+    </section>
+    <div class="shop-cooking-divider">Next up · Cook</div>
     <section class="welcome" aria-labelledby="recipeTitle">
       <p class="eyebrow">Your cooking companion</p>
       <h1 id="recipeTitle">Your recipe, one step at a time.</h1>
@@ -71,6 +97,28 @@
   </dialog>
 
   <dialog id="addDialog" aria-labelledby="addTitle"><div class="modal-content"><div class="modal-top"><div><h2 id="addTitle">Add a step</h2><p>It will be added to the bottom of your checklist.</p></div><button type="button" class="close" id="closeAdd" aria-label="Close"><svg class="icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div><label class="field-label" for="newStepInput">What needs doing?</label><input id="newStepInput" type="text" maxlength="500" placeholder="e.g. Garnish with cilantro"><div class="modal-actions"><button class="button" type="button" id="saveStep">Add to checklist</button><button class="button secondary" id="cancelAdd" type="button">Cancel</button></div></div></dialog>
+  <dialog id="shoppingItemDialog" aria-labelledby="shoppingItemTitle"><form class="modal-content shop-modal-form" id="shoppingItemForm">
+    <div class="modal-top"><div><h2 id="shoppingItemTitle">Add a shopping item</h2><p>Add it to the store where you plan to buy it.</p></div><button type="button" class="close" data-close-shopping="shoppingItemDialog" aria-label="Close item editor">✕</button></div>
+    <label class="field-label" for="shoppingItemName">Item name</label><input type="text" id="shoppingItemName" maxlength="240" placeholder="e.g. Greek yogurt, 32 oz" required autocomplete="off">
+    <label class="field-label" for="shoppingItemStore">Store</label><select id="shoppingItemStore" class="shop-select" required></select>
+    <p class="shop-inline-error hidden" id="shoppingItemError" role="alert"></p>
+    <div class="modal-actions"><button type="submit" class="button" id="shoppingItemSave">Add item</button><button type="button" class="button secondary" data-close-shopping="shoppingItemDialog">Cancel</button></div>
+  </form></dialog>
+  <dialog id="shoppingStoreDialog" aria-labelledby="shoppingStoreTitle"><form class="modal-content shop-modal-form" id="shoppingStoreForm">
+    <div class="modal-top"><div><h2 id="shoppingStoreTitle">Add a store</h2><p>Keep each stop on your grocery run organized.</p></div><button type="button" class="close" data-close-shopping="shoppingStoreDialog" aria-label="Close store editor">✕</button></div>
+    <label class="field-label" for="shoppingStoreName">Store name</label><input type="text" id="shoppingStoreName" maxlength="80" placeholder="e.g. Costco or Trader Joe’s" required autocomplete="off">
+    <p class="shop-inline-error hidden" id="shoppingStoreError" role="alert"></p>
+    <div class="modal-actions"><button type="submit" class="button" id="shoppingStoreSave">Add store</button><button type="button" class="button secondary" data-close-shopping="shoppingStoreDialog">Cancel</button></div>
+    <div class="danger-zone hidden" id="shoppingStoreDeleteZone"><p>Removes this store and its items. You can undo this.</p><button type="button" class="button danger small" id="shoppingDeleteStore">Delete store</button></div>
+  </form></dialog>
+  <dialog id="shoppingPasteDialog" aria-labelledby="shoppingPasteTitle"><form class="modal-content shop-modal-form" id="shoppingPasteForm">
+    <div class="modal-top"><div><h2 id="shoppingPasteTitle">Paste a shopping list</h2><p>Add a whole list in one go.</p></div><button type="button" class="close" data-close-shopping="shoppingPasteDialog" aria-label="Close shopping list importer">✕</button></div>
+    <label class="field-label" for="shoppingPasteStore">Default store</label><select class="shop-select" id="shoppingPasteStore"></select>
+    <label class="field-label" for="shoppingPasteText">Items — one per line</label><textarea class="shop-paste-text" id="shoppingPasteText" maxlength="30000" placeholder="Walmart:&#10;- Fresh spinach&#10;- Greek yogurt&#10;&#10;WinCo:&#10;- Red quinoa&#10;- Pumpkin seeds"></textarea>
+    <p class="shop-paste-help">Use <code>Walmart:</code> or <code>## Walmart</code> to start a store group. Plain items go to the default store. Adds to your list, keeps checked boxes, and skips duplicates in the same store.</p>
+    <div class="import-preview" id="shoppingPastePreview" role="status">Paste a list to see what will be added.</div>
+    <div class="modal-actions"><button type="submit" class="button" id="shoppingPasteSave" disabled>Add to shopping list</button><button type="button" class="button secondary" data-close-shopping="shoppingPasteDialog">Cancel</button></div>
+  </form></dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script>
@@ -159,6 +207,149 @@
     el('saveStep').addEventListener('click',addStep);el('newStepInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();addStep()}});
     render();if(!localStorage.getItem(STORAGE_KEY))save();
     // Fully self-contained: no service worker, network calls, accounts, or external assets.
+  })();
+  </script>
+  <script>
+  (()=>{
+    'use strict';
+    const SHOPPING_KEY='cookflow-shopping-v1';
+    const el=id=>document.getElementById(id);
+    const makeId=()=>Math.random().toString(36).slice(2,10)+Date.now().toString(36);
+    const cleanName=text=>String(text).trim().replace(/\s+/g,' ');
+    const sameName=(a,b)=>cleanName(a).toLocaleLowerCase()===cleanName(b).toLocaleLowerCase();
+    const checkSvg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>';
+    const pencilSvg='<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L9 17l-4 1 1-4Z"/></svg>';
+    const trashSvg='<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7M14 10v7"/></svg>';
+    const newItem=(text,done=false)=>({id:makeId(),text,done});
+    const newStore=(name,items=[])=>({id:makeId(),name,items,collapsed:false});
+    const starter=()=>({version:1,collapsed:false,lastStore:'',stores:[
+      newStore('Walmart',[newItem('Fresh spinach',true),newItem('Frozen kale, blueberries',true),newItem('Boneless skinless chicken breast'),newItem('Greek yogurt')]),
+      newStore('WinCo',[newItem('Red quinoa'),newItem('Pumpkin seeds'),newItem('Canned beans: garbanzos, pintos, kidneys')]),
+      newStore('Target')
+    ]});
+    let hasSavedShopping=false;
+    function loadShopping(){
+      try{const raw=localStorage.getItem(SHOPPING_KEY);if(raw){const value=JSON.parse(raw);if(value&&Array.isArray(value.stores)){
+        const stores=value.stores.filter(s=>s&&typeof s.name==='string'&&s.name.trim()&&Array.isArray(s.items)).map(s=>({id:typeof s.id==='string'?s.id:makeId(),name:cleanName(s.name).slice(0,80),collapsed:!!s.collapsed,items:s.items.filter(i=>i&&typeof i.text==='string'&&i.text.trim()).map(i=>({id:typeof i.id==='string'?i.id:makeId(),text:i.text.trim().slice(0,240),done:!!i.done}))}));
+        hasSavedShopping=true;return {version:1,collapsed:!!value.collapsed,lastStore:typeof value.lastStore==='string'?value.lastStore:'',stores};
+      }}}catch(e){}return starter();
+    }
+    let shopping=loadShopping(),undoStores=null,editingItem=null,editingStore=null;
+    function message(text){el('shoppingMessage').textContent=text;el('shoppingUndo').classList.toggle('hidden',!undoStores)}
+    function saveShopping(){try{localStorage.setItem(SHOPPING_KEY,JSON.stringify(shopping));return true}catch(e){message('This browser could not save your shopping list.');return false}}
+    function clearUndo(){undoStores=null;el('shoppingUndo').classList.add('hidden')}
+    function reversibleChange(change,text){undoStores=JSON.parse(JSON.stringify(shopping.stores));change();renderShopping();message(text);saveShopping()}
+    function finishChange(text){clearUndo();renderShopping();message(text);saveShopping()}
+    function focusElement(id){el(id)?.focus({preventScroll:true})}
+    function storeOptions(select,selected){
+      select.replaceChildren();
+      for(const store of shopping.stores){const option=document.createElement('option');option.value=store.id;option.textContent=store.name;select.append(option)}
+      if(!shopping.stores.length){const option=document.createElement('option');option.value='';option.textContent='Add a store first';select.append(option)}
+      select.disabled=!shopping.stores.length;
+      select.value=shopping.stores.some(s=>s.id===selected)?selected:(shopping.stores[0]?.id||'');
+    }
+    function iconButton(label,svg,handler,extra=''){
+      const button=document.createElement('button');button.type='button';button.className='shop-icon-button '+extra;button.setAttribute('aria-label',label);button.title=label;button.innerHTML=svg;button.addEventListener('click',handler);return button;
+    }
+    function renderShopping(){
+      const items=shopping.stores.flatMap(s=>s.items),bought=items.filter(i=>i.done).length,total=items.length,percent=total?Math.round(bought/total*100):0;
+      el('shoppingPanel').classList.toggle('is-collapsed',shopping.collapsed);el('shoppingBody').hidden=shopping.collapsed;
+      el('shoppingToggle').setAttribute('aria-expanded',String(!shopping.collapsed));el('shoppingToggle').setAttribute('aria-label',(shopping.collapsed?'Expand':'Collapse')+' shopping list');el('shoppingToggle').setAttribute('aria-describedby','shoppingCount shoppingPercent');
+      el('shoppingCount').textContent=`${bought} of ${total} bought · ${shopping.stores.length} ${shopping.stores.length===1?'store':'stores'}`;
+      el('shoppingPercent').textContent=percent+'%';el('shoppingFill').style.width=percent+'%';el('shoppingMeter').setAttribute('aria-valuenow',String(percent));el('shoppingMeter').setAttribute('aria-valuetext',`${bought} of ${total} items bought, ${percent}%`);
+      el('shoppingReset').disabled=!bought;el('shoppingNewItem').disabled=!shopping.stores.length;el('shoppingQuickAdd').disabled=!shopping.stores.length;
+      storeOptions(el('shoppingStoreSelect'),shopping.lastStore);
+      const container=el('shoppingStores');container.replaceChildren();
+      if(!shopping.stores.length){const empty=document.createElement('div');empty.className='shop-empty-list';empty.textContent='A fresh start. Add a store, then add what you need for your next shopping trip.';container.append(empty)}
+      for(const store of shopping.stores){
+        const count=store.items.filter(i=>i.done).length,pct=store.items.length?Math.round(count/store.items.length*100):0;
+        const card=document.createElement('section');card.className='shop-store'+(store.collapsed?' closed':'');card.setAttribute('aria-labelledby','shop-store-name-'+store.id);
+        const header=document.createElement('div');header.className='shop-store-header';
+        const toggle=document.createElement('button');toggle.type='button';toggle.className='shop-store-toggle';toggle.id='shop-store-toggle-'+store.id;toggle.setAttribute('aria-expanded',String(!store.collapsed));toggle.setAttribute('aria-controls','shop-store-body-'+store.id);
+        toggle.innerHTML='<svg class="icon shop-store-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
+        const meta=document.createElement('span'),name=document.createElement('span'),counter=document.createElement('span');name.className='shop-store-name';name.id='shop-store-name-'+store.id;name.textContent=store.name;counter.className='shop-store-count';counter.textContent=`${count} of ${store.items.length} bought · ${pct}%`;meta.append(name,counter);toggle.append(meta);
+        toggle.addEventListener('click',()=>{store.collapsed=!store.collapsed;saveShopping();renderShopping();focusElement(toggle.id)});
+        header.append(toggle,iconButton('Edit store '+store.name,pencilSvg,()=>openStoreEditor(store.id)),iconButton('Remove store '+store.name+' and its items',trashSvg,()=>removeShoppingStore(store.id),'delete'));card.append(header);
+        const bar=document.createElement('div');bar.className='shop-store-bar';bar.setAttribute('aria-hidden','true');const fill=document.createElement('span');fill.style.width=pct+'%';bar.append(fill);card.append(bar);
+        const body=document.createElement('div');body.className='shop-store-body';body.id='shop-store-body-'+store.id;body.hidden=store.collapsed;
+        if(store.items.length){
+          const list=document.createElement('ul');list.className='shop-item-list';
+          for(const item of store.items){
+            const row=document.createElement('li');row.className='shop-item'+(item.done?' completed':'');
+            const label=document.createElement('label');label.className='shop-item-label';const input=document.createElement('input');input.type='checkbox';input.id='shop-item-check-'+item.id;input.checked=item.done;input.setAttribute('aria-label','Bought '+item.text+' at '+store.name);
+            input.addEventListener('change',()=>{item.done=input.checked;finishChange(item.done?`Bought ${item.text}.`:`${item.text} is back on your list.`);focusElement(input.id)});
+            const check=document.createElement('span');check.className='shop-check';check.setAttribute('aria-hidden','true');check.innerHTML=checkSvg;const text=document.createElement('span');text.className='shop-item-text';text.textContent=item.text;label.append(input,check,text);
+            const actions=document.createElement('div');actions.className='shop-item-actions';actions.append(iconButton('Edit or move '+item.text+' at '+store.name,pencilSvg,()=>openItemEditor(store.id,item.id)),iconButton('Remove '+item.text+' from '+store.name,trashSvg,()=>{reversibleChange(()=>{store.items=store.items.filter(i=>i.id!==item.id)},`Removed ${item.text}.`);focusElement('shoppingUndo')},'delete'));
+            row.append(label,actions);list.append(row);
+          }
+          body.append(list);
+        }else{const empty=document.createElement('p');empty.className='shop-store-empty';empty.textContent='Nothing on the list here yet.';body.append(empty)}
+        const addForm=document.createElement('form');addForm.className='shop-store-add-form';addForm.setAttribute('aria-label','Add item at '+store.name);
+        const inputLabel=document.createElement('label');inputLabel.className='sr-only';inputLabel.htmlFor='shop-inline-input-'+store.id;inputLabel.textContent='New item at '+store.name;
+        const quickInput=document.createElement('input');quickInput.type='text';quickInput.id=inputLabel.htmlFor;quickInput.placeholder='Add an item at '+store.name+'…';quickInput.maxLength=240;quickInput.required=true;quickInput.autocomplete='off';
+        const add=document.createElement('button');add.type='submit';add.className='button secondary';add.textContent='+';add.setAttribute('aria-label','Add item at '+store.name);
+        addForm.addEventListener('submit',event=>{event.preventDefault();addShoppingItem(quickInput.value,store.id);focusElement(quickInput.id)});addForm.append(inputLabel,quickInput,add);body.append(addForm);card.append(body);container.append(card);
+      }
+    }
+    function findItem(id){for(const store of shopping.stores){const item=store.items.find(i=>i.id===id);if(item)return {store,item}}return null}
+    function removeShoppingStore(id){const store=shopping.stores.find(s=>s.id===id);if(!store)return;reversibleChange(()=>{shopping.stores=shopping.stores.filter(s=>s.id!==store.id)},`Removed ${store.name}${store.items.length?' and its items':''}.`);focusElement('shoppingUndo')}
+    function showError(id,text){el(id).textContent=text;el(id).classList.remove('hidden')}
+    function addShoppingItem(text,storeId){
+      const store=shopping.stores.find(s=>s.id===storeId);text=cleanName(text).slice(0,240);if(!store||!text)return false;
+      if(store.items.some(i=>sameName(i.text,text))){message(`${text} is already listed at ${store.name}.`);return false}
+      store.items.push(newItem(text));store.collapsed=false;shopping.lastStore=store.id;finishChange(`Added ${text} to ${store.name}.`);return true;
+    }
+    function openItemEditor(storeId,itemId=null){
+      const found=itemId?findItem(itemId):null;editingItem=found?found.item.id:null;
+      el('shoppingItemTitle').textContent=found?'Edit or move item':'Add a shopping item';el('shoppingItemSave').textContent=found?'Save item':'Add item';el('shoppingItemName').value=found?found.item.text:'';
+      el('shoppingItemError').classList.add('hidden');storeOptions(el('shoppingItemStore'),found?found.store.id:storeId);el('shoppingItemDialog').showModal();el('shoppingItemName').focus();
+    }
+    function openStoreEditor(storeId=null){
+      const store=shopping.stores.find(s=>s.id===storeId);editingStore=store?store.id:null;
+      el('shoppingStoreTitle').textContent=store?'Edit store':'Add a store';el('shoppingStoreSave').textContent=store?'Save store':'Add store';el('shoppingStoreName').value=store?store.name:'';el('shoppingStoreError').classList.add('hidden');el('shoppingStoreDeleteZone').classList.toggle('hidden',!store);el('shoppingStoreDialog').showModal();el('shoppingStoreName').focus();
+    }
+    function parseShoppingList(text,fallbackName,knownNames){
+      const groups=[];let current=null;const lines=text.replace(/\r/g,'').split('\n');
+      const group=name=>{name=cleanName(name).slice(0,80)||'Shopping list';let found=groups.find(g=>sameName(g.name,name));if(!found){found={name,items:[]};groups.push(found)}current=found};
+      const isList=line=>/^(?:[-*+•–]\s+|\d{1,3}[.)]\s+|\[[xX ]\]\s*|[☐☑✅✓○◯]\s*)/.test(line);
+      for(let index=0;index<lines.length;index++){
+        const line=lines[index].trim();if(!line||/^```/.test(line)||/^---+$/.test(line))continue;
+        if(/^(?:grocery\s+)?shopping list$/i.test(line))continue;
+        const heading=line.match(/^#{1,6}\s+(.+?)\s*#*$/),colon=!isList(line)&&line.length<=81&&line.endsWith(':'),bold=line.match(/^\*\*([^*]{1,80})\*\*:?$/);
+        const known=!isList(line)&&knownNames.some(name=>sameName(name,line));
+        const next=lines.slice(index+1).find(value=>value.trim())?.trim()||'';
+        const plainHeading=!isList(line)&&line.length<=80&&(index===0||!lines[index-1].trim())&&isList(next);
+        if(heading||colon||bold||known||plainHeading){group((heading?heading[1]:bold?bold[1]:line).replace(/:$/,'').replace(/\*\*/g,''));continue}
+        const done=/^(?:[-*+•–]\s*)?(?:\[[xX]\]|[☑✅✓])/.test(line);
+        const itemText=line.replace(/^[-*+•–]\s+/,'').replace(/^\d{1,3}[.)]\s+/,'').replace(/^(?:\[[xX ]\]|[☐☑✅✓○◯])\s*/,'').replace(/\*\*/g,'').trim().slice(0,240);
+        if(!itemText)continue;if(!current)group(fallbackName||'Shopping list');current.items.push({text:itemText,done});
+      }
+      return groups;
+    }
+    function parsedShoppingPaste(){return parseShoppingList(el('shoppingPasteText').value,shopping.stores.find(s=>s.id===el('shoppingPasteStore').value)?.name||'Shopping list',shopping.stores.map(s=>s.name))}
+    function shoppingPastePreview(){const groups=parsedShoppingPaste(),count=groups.reduce((sum,g)=>sum+g.items.length,0),stores=groups.filter(g=>g.items.length).length;el('shoppingPastePreview').textContent=count?`${count} ${count===1?'item':'items'} across ${stores} ${stores===1?'store':'stores'} · ready to add`:'Paste a list to see what will be added.';el('shoppingPasteSave').disabled=!count}
+    el('shoppingToggle').addEventListener('click',()=>{shopping.collapsed=!shopping.collapsed;saveShopping();renderShopping()});
+    el('shoppingStoreSelect').addEventListener('change',()=>{shopping.lastStore=el('shoppingStoreSelect').value;saveShopping()});
+    el('shoppingAddForm').addEventListener('submit',event=>{event.preventDefault();if(addShoppingItem(el('shoppingNewItem').value,el('shoppingStoreSelect').value))el('shoppingNewItem').value='';el('shoppingNewItem').focus()});
+    el('shoppingAddStore').addEventListener('click',()=>openStoreEditor());
+    el('shoppingStoreForm').addEventListener('submit',event=>{event.preventDefault();const name=cleanName(el('shoppingStoreName').value).slice(0,80);if(!name)return;if(shopping.stores.some(s=>s.id!==editingStore&&sameName(s.name,name))){showError('shoppingStoreError','That store is already on your list. Choose another name.');return}
+      const store=shopping.stores.find(s=>s.id===editingStore);if(store){store.name=name;finishChange(`Store renamed to ${name}.`)}else{const added=newStore(name);shopping.stores.push(added);shopping.lastStore=added.id;finishChange(`${name} added. You can add items now.`)}el('shoppingStoreDialog').close();
+    });
+    el('shoppingDeleteStore').addEventListener('click',()=>{removeShoppingStore(editingStore);el('shoppingStoreDialog').close();focusElement('shoppingUndo')});
+    el('shoppingItemForm').addEventListener('submit',event=>{event.preventDefault();const text=cleanName(el('shoppingItemName').value).slice(0,240),target=shopping.stores.find(s=>s.id===el('shoppingItemStore').value);if(!text||!target)return;
+      if(target.items.some(i=>i.id!==editingItem&&sameName(i.text,text))){showError('shoppingItemError','That item is already listed at this store.');return}
+      if(editingItem){const found=findItem(editingItem);if(!found)return;found.item.text=text;if(found.store.id!==target.id){found.store.items=found.store.items.filter(i=>i.id!==editingItem);target.items.push(found.item)}target.collapsed=false;shopping.lastStore=target.id;finishChange(`Saved ${text} at ${target.name}.`)}else{addShoppingItem(text,target.id)}el('shoppingItemDialog').close();
+    });
+    el('shoppingUndo').addEventListener('click',()=>{if(!undoStores)return;shopping.stores=undoStores;undoStores=null;renderShopping();message('Undone. Your shopping list is restored.');saveShopping()});
+    el('shoppingReset').addEventListener('click',()=>{reversibleChange(()=>shopping.stores.forEach(s=>s.items.forEach(i=>i.done=false)),'All shopping checks reset for your next trip.');focusElement('shoppingUndo')});
+    el('shoppingPasteButton').addEventListener('click',()=>{storeOptions(el('shoppingPasteStore'),shopping.lastStore);if(!shopping.stores.length){el('shoppingPasteStore').options[0].textContent='Shopping list'}el('shoppingPasteText').value='';shoppingPastePreview();el('shoppingPasteDialog').showModal();el('shoppingPasteText').focus()});
+    el('shoppingPasteText').addEventListener('input',shoppingPastePreview);el('shoppingPasteStore').addEventListener('change',shoppingPastePreview);
+    el('shoppingPasteForm').addEventListener('submit',event=>{event.preventDefault();const groups=parsedShoppingPaste();if(!groups.some(g=>g.items.length))return;let added=0;
+      reversibleChange(()=>{for(const imported of groups){let store=shopping.stores.find(s=>sameName(s.name,imported.name));if(!store){store=newStore(imported.name);shopping.stores.push(store)}for(const item of imported.items){if(!store.items.some(i=>sameName(i.text,item.text))){store.items.push(newItem(item.text,item.done));added++}}if(imported.items.length)store.collapsed=false}},'Shopping list imported.');
+      message(added?`Added ${added} shopping ${added===1?'item':'items'}.`:'Those items are already on your list.');el('shoppingPasteDialog').close();
+    });
+    document.querySelectorAll('[data-close-shopping]').forEach(button=>button.addEventListener('click',()=>el(button.dataset.closeShopping).close()));
+    renderShopping();if(!hasSavedShopping)saveShopping();
   })();
   </script>
 </body>
