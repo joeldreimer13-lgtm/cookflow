@@ -55,7 +55,7 @@ xcodebuild -project CookFlowApple.xcodeproj -scheme CookFlowWatch -configuration
 
 Simulator compilation does not sign or install the app on your physical devices. Paired-device transport, background delivery, and provisioning still require device testing.
 
-`scripts/generate_project.py` is included only to reproduce the checked-in project and Info.plist files. App icons are standard asset catalogs. `--preview` is a local simulator launch argument that shows the bundled public example without connecting to a phone; `--shopping` opens the stores screen for visual checks. Preview mode does not replace saved device lists or send sample data to a paired iPhone.
+`scripts/generate_project.py` is included only to reproduce the checked-in project and Info.plist files. App icons are standard asset catalogs. `--preview` is a local simulator launch argument that shows the bundled public example without connecting to a phone; `--shopping` opens the stores screen and `--items` opens the first store for visual checks. Preview mode does not replace saved device lists or send sample data to a paired iPhone.
 
 ## Apple references
 
