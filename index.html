@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f6f0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="CookFlow">
+  <meta name="description" content="Paste any recipe, tick off steps, and see your cooking progress. Your checklist saves automatically on this device.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232c7158'/%3E%3Cpath d='M13 32 26 44 51 18' stroke='white' stroke-width='7' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <title>CookFlow · Your cooking checklist</title>
+  <style>
+    :root{--ink:#24312b;--muted:#69746d;--line:#e0e5dd;--cream:#f7f6f0;--white:#fff;--green:#2c7158;--green-dark:#1c5b45;--soft-green:#e7f2e9;--gold:#e9a950;--shadow:0 16px 35px rgba(37,61,43,.065);color-scheme:light}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}button,input,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #b0d5be;outline-offset:2px}button:disabled{cursor:not-allowed;opacity:.5}.hidden{display:none!important}
+    body:before{content:"";position:absolute;top:0;left:0;right:0;height:230px;z-index:-1;background:radial-gradient(ellipse at 15% 20%,#ebeedb 0,transparent 55%),radial-gradient(ellipse at 95% 0,#e7ece3 0,transparent 53%)}
+    .shell{width:min(100%,800px);margin:0 auto;padding:calc(env(safe-area-inset-top) + 18px) 20px calc(env(safe-area-inset-bottom) + 46px)}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:5px 0 21px}.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}.mark{width:42px;height:42px;display:grid;place-items:center;background:var(--green);color:white;border-radius:14px;box-shadow:0 7px 16px #35745425}.brand-title{font-size:23px;font-weight:800;letter-spacing:-1px}.brand-title span{color:var(--green)}.micro{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:var(--muted)}
+    .button{border:0;background:var(--green);color:#fff;border-radius:13px;min-height:45px;padding:10px 17px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:750;transition:transform .12s,background .12s}.button:active{transform:scale(.98)}.button:hover{background:var(--green-dark)}.button.secondary{background:#edf0e8;color:var(--ink)}.button.secondary:hover{background:#e2e9e0}.button.ghost{background:transparent;color:var(--green);padding:9px 10px}.button.ghost:hover{background:#ecf0e7}.button.small{min-height:38px;font-size:13px;padding:8px 12px}.button.danger{background:#f9e5e0;color:#a23c33}.icon{width:18px;height:18px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+    .welcome{margin:6px 0 22px}.eyebrow{color:var(--green);font-size:12px;font-weight:850;text-transform:uppercase;letter-spacing:.14em;margin:0 0 9px}.welcome h1{font-size:clamp(31px,6vw,47px);line-height:1.06;letter-spacing:-1.7px;margin:0;max-width:680px}.welcome p{font-size:15px;line-height:1.5;color:var(--muted);margin:11px 0 0}
+    .progress-card{position:sticky;top:10px;z-index:15;border-radius:22px;padding:20px;background:var(--ink);color:#fff;box-shadow:0 16px 34px #1a312947;margin:0 0 21px}.progress-top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:14px}.progress-title{font-size:14px;font-weight:700;color:#dbe7df;margin-bottom:5px}.progress-count{font-size:12px;color:#afc6b6}.percentage{font-size:41px;letter-spacing:-2px;font-weight:850;line-height:1;font-variant-numeric:tabular-nums}.meter{height:11px;background:#44574d;border-radius:99px;overflow:hidden}.meter-fill{width:0;height:100%;background:linear-gradient(90deg,#8fcc9f,#e8bd72);border-radius:inherit;transition:width .38s cubic-bezier(.22,1,.36,1)}.progress-foot{display:flex;justify-content:space-between;gap:12px;align-items:center;color:#c2d3c6;font-size:12px;margin-top:12px}.progress-foot strong{color:#fff;font-weight:650}.dot{width:6px;height:6px;background:#97d4a7;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:middle}
+    .toolbar{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap}.toolbar-actions{display:flex;align-items:center;gap:7px}.section-label{font-size:13px;font-weight:850;color:#59685e;text-transform:uppercase;letter-spacing:.1em}.recipe-action{font-size:13px;color:var(--muted)}
+    .phase{background:#fff;border:1px solid var(--line);border-radius:20px;margin:0 0 13px;overflow:hidden;box-shadow:var(--shadow)}.phase-head{width:100%;display:flex;align-items:center;gap:12px;padding:17px 17px;border:none;background:transparent;text-align:left;color:var(--ink)}.phase-num{width:36px;height:36px;display:grid;place-items:center;font-weight:800;font-size:14px;color:var(--green);background:#edf4eb;border-radius:11px;flex-shrink:0}.phase-meta{flex:1;min-width:0}.phase-name{font-size:16px;font-weight:800;line-height:1.25}.phase-count{color:var(--muted);font-size:12px;margin-top:4px}.phase-chevron{width:17px;height:17px;transition:transform .2s;stroke:#76877b}.phase.collapsed .phase-chevron{transform:rotate(-90deg)}.phase.done .phase-num{background:#dceddf}.phase.done .phase-name{color:#587668}
+    .phase-content{border-top:1px solid #edf0e9;padding:7px 12px 12px}.phase.collapsed .phase-content{display:none}.step{display:flex;align-items:flex-start;gap:12px;padding:11px 7px;min-height:51px;border-radius:12px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}.step:hover{background:#fafbf7}.step:active{background:#f4f8f1}.step+.step{border-top:1px solid #f3f4ef}.check{height:27px;width:27px;flex:0 0 27px;border-radius:9px;border:2px solid #cbd6ca;margin-top:0;display:grid;place-items:center;background:#fff;transition:all .15s}.check svg{width:18px;height:18px;stroke:#fff;stroke-width:3;fill:none;opacity:0;transform:scale(.75);transition:.15s}.step.completed .check{background:var(--green);border-color:var(--green)}.step.completed .check svg{opacity:1;transform:scale(1)}.step-text{font-size:15px;line-height:1.5;flex:1;overflow-wrap:anywhere;padding:2px 2px 0 0}.step.completed .step-text{color:#87948a;text-decoration:line-through;text-decoration-thickness:1px}.step input{position:absolute;opacity:0;width:1px;height:1px}.step:focus-within{outline:2px solid #9ccfac;outline-offset:-1px}.current-indicator{margin-left:4px;color:var(--green);background:#eaf4ec;border-radius:6px;font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:5px 7px;font-weight:800;align-self:flex-start}.empty{background:white;border-radius:22px;padding:35px 20px;text-align:center;border:1px dashed #c9d5cb}.empty svg{width:36px;height:36px;color:var(--green)}.empty h2{margin:10px 0 6px}.empty p{color:var(--muted);line-height:1.55;margin:0 0 18px}
+    .bottom-actions{display:flex;flex-wrap:wrap;gap:9px;justify-content:space-between;padding:17px 2px 0}.tip{font-size:12px;color:#849187;text-align:center;margin-top:23px;line-height:1.65}.tip strong{color:#5b6f60}
+    dialog{border:none;border-radius:23px;padding:0;width:min(700px,calc(100% - 18px));max-height:min(90dvh,920px);box-shadow:0 22px 90px #10261c75;background:#fff;color:var(--ink)}dialog::backdrop{background:#111f19a8;backdrop-filter:blur(3px)}.modal-content{padding:23px 24px 24px;max-height:90dvh;overflow:auto}.modal-top{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}.modal-top h2{margin:0 0 5px;font-size:23px;letter-spacing:-.6px}.modal-top p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}.close{border:none;background:#f2f4ef;border-radius:11px;height:37px;width:37px;display:grid;place-items:center;color:var(--ink);flex-shrink:0}.field-label{display:block;font-size:12px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:#657168;margin:20px 0 8px}input[type=text],textarea{border:1px solid #cfd8ce;width:100%;background:#fbfcfa;color:var(--ink);border-radius:13px;padding:13px 14px;font-size:16px;outline:none}input[type=text]:focus,textarea:focus{border-color:#559c74;box-shadow:0 0 0 3px #e1f1e5}textarea{min-height:220px;line-height:1.5;resize:vertical}.hint{font-size:12px;color:var(--muted);line-height:1.55;margin:10px 0 0}.hint code{font-size:11px;background:#edf3e9;padding:2px 4px;border-radius:4px}.import-preview{margin:15px 0 0;background:#f3f7ef;border:1px solid #e2ebe0;border-radius:11px;padding:11px 13px;color:#52715c;font-size:13px}.modal-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.modal-actions .button:first-child{flex:1}.danger-zone{margin-top:19px;border-top:1px solid #edf0ea;padding-top:15px;display:flex;justify-content:space-between;align-items:center;gap:10px}.danger-zone p{font-size:12px;color:var(--muted);margin:0}.toast{position:fixed;bottom:calc(env(safe-area-inset-bottom) + 20px);left:50%;transform:translateX(-50%) translateY(100px);opacity:0;background:#24352a;color:white;padding:11px 17px;border-radius:13px;z-index:30;box-shadow:0 10px 35px #1b2d2660;font-size:13px;font-weight:600;pointer-events:none;transition:transform .3s,opacity .3s;max-width:calc(100% - 32px);text-align:center}.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+    @media(max-width:560px){.shell{padding-left:14px;padding-right:14px}.welcome h1{font-size:35px}.progress-card{padding:18px;top:6px}.percentage{font-size:38px}.modal-content{padding:22px 17px}.toolbar-actions .button{padding:9px 11px}.button.small{font-size:12px}.step-text{font-size:15px}.current-indicator{display:none}.phase-head{padding:15px}.phase-content{padding:5px 8px 10px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div class="brand" aria-label="CookFlow home">
+        <div class="mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" style="width:24px;height:24px"><path d="m5 12 4 4L19 6"/></svg></div>
+        <div><div class="brand-title">Cook<span>Flow</span></div><div class="micro">Kitchen companion</div></div>
+      </div>
+      <button class="button secondary small" id="editTop" type="button"><svg class="icon" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L9 17l-4 1 1-4Z"/></svg> Paste steps</button>
+    </header>
+
+    <section class="welcome" aria-labelledby="recipeTitle">
+      <p class="eyebrow">Your cooking companion</p>
+      <h1 id="recipeTitle">Your recipe, one step at a time.</h1>
+      <p>Big progress from small checkmarks. Everything saves automatically on this device.</p>
+    </section>
+
+    <section class="progress-card" aria-label="Cooking progress">
+      <div class="progress-top"><div><div class="progress-title">Cooking progress</div><div class="progress-count" id="progressCount">0 of 0 steps complete</div></div><div class="percentage" id="progressPercent">0%</div></div>
+      <div class="meter" role="progressbar" id="progressMeter" aria-label="Recipe completed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="meter-fill" id="progressFill"></div></div>
+      <div class="progress-foot"><span><span class="dot"></span><span id="progressStatus">Ready when you are</span></span><strong id="remaining">0 steps left</strong></div>
+    </section>
+
+    <div class="toolbar"><span class="section-label" id="sectionLabel">Your checklist</span><div class="toolbar-actions"><button class="button ghost small" id="resetButton" type="button"><svg class="icon" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg> Start over</button><button class="button secondary small" id="addStepButton" type="button">+ Add step</button></div></div>
+    <div id="sections"></div>
+    <div class="bottom-actions"><button class="button secondary" id="editBottom" type="button">Paste a new recipe</button><button class="button ghost" id="expandButton" type="button">Collapse all sections</button></div>
+    <p class="tip"><strong>iPhone tip:</strong> In Safari, tap Share → Add to Home Screen for quick access. Progress stays in this browser's local storage, not in an online account.</p>
+  </main>
+
+  <dialog id="importDialog" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <div class="modal-top"><div><h2 id="modalTitle">Paste your cooking steps</h2><p>Turn any recipe into an interactive checklist.</p></div><button type="button" class="close" id="closeDialog" aria-label="Close"><svg class="icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+      <label class="field-label" for="nameInput">Recipe name</label>
+      <input type="text" id="nameInput" maxlength="100" placeholder="e.g. Sunday meal prep">
+      <label class="field-label" for="pasteInput">Steps — one per line</label>
+      <textarea id="pasteInput" spellcheck="false" placeholder="## Prep ingredients&#10;- Chop the onion&#10;- Rinse the beans&#10;&#10;## Cook&#10;1. Sauté the vegetables&#10;2. Pressure cook for 20 minutes&#10;3. Let pressure release naturally"></textarea>
+      <p class="hint">Supports numbered lists, bullet points, and checkboxes. Use <code>## Section name</code> on a line to group your steps. Plain lines work too. Pasting a new recipe replaces the current checklist.</p>
+      <div class="import-preview" id="importPreview" role="status">Paste your steps to see how many will be imported.</div>
+      <div class="modal-actions"><button class="button" type="button" id="importButton">Create checklist</button><button class="button secondary" type="button" id="demoButton">Use chili example</button></div>
+      <div class="danger-zone"><p>Everything is stored only on this device.</p><button type="button" id="clearButton" class="button danger small">Clear all</button></div>
+    </div>
+  </dialog>
+
+  <dialog id="addDialog" aria-labelledby="addTitle"><div class="modal-content"><div class="modal-top"><div><h2 id="addTitle">Add a step</h2><p>It will be added to the bottom of your checklist.</p></div><button type="button" class="close" id="closeAdd" aria-label="Close"><svg class="icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div><label class="field-label" for="newStepInput">What needs doing?</label><input id="newStepInput" type="text" maxlength="500" placeholder="e.g. Garnish with cilantro"><div class="modal-actions"><button class="button" type="button" id="saveStep">Add to checklist</button><button class="button secondary" id="cancelAdd" type="button">Cancel</button></div></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+  (()=>{
+    'use strict';
+    const STORAGE_KEY='cookflow-recipe-v1';
+    const el=id=>document.getElementById(id);
+    const makeId=()=>Math.random().toString(36).slice(2,10)+Date.now().toString(36);
+    const template=[
+      {title:'1. Gather ingredients',steps:['Measure 2 cups dried mixed beans and 2 lb of 99% lean ground turkey.','Dice 2 large yellow onions and 2 bell peppers. Mince 6 garlic cloves.','Measure 3 tbsp salt-free chili powder, 1½ tbsp cumin, 1 tbsp smoked paprika, 1½ tsp oregano, ½ tsp cayenne, and 1½ tsp unsweetened cocoa.','Set out 1 tbsp olive oil, 2 cups unsalted chicken broth, 28 oz no-salt-added crushed tomatoes, and 14.5 oz no-salt-added diced tomatoes.','Set aside 1–2 limes and fresh cilantro.']},
+      {title:'2. Soak the beans · 8–12 hours',steps:['Sort beans and remove any stones or debris. Rinse thoroughly.','Cover beans with at least 3 inches of water in a large bowl.','Soak 8–12 hours, then drain and discard soaking water. Rinse again.']},
+      {title:'3. Pressure-cook beans',steps:['Add soaked beans and approximately 6–7 cups fresh water to the inner pot. Stay below the Half Fill line.','Lock the pressure lid and confirm Sealing.','Pressure Cook on High for 20 minutes.','Let pressure release naturally for 20 minutes, then carefully release the remainder.','Check that even the largest kidney beans are fully tender; pressure-cook 5 minutes more if needed.','Drain the cooked beans and set them aside in a bowl.']},
+      {title:'4. Brown turkey and build chili',steps:['Select Sauté. Add 1 tbsp olive oil, onions, and peppers. Cook 4–5 minutes.','Add 2 lb lean ground turkey, break into small pieces, and brown thoroughly.','Add minced garlic for 30 seconds, then bloom all measured spices for 30 seconds.','Pour in 2 cups unsalted broth and scrape up all browned bits from the bottom.','Stir in cooked beans and the 14.5-oz diced tomatoes.','Layer 28 oz crushed tomatoes on top without stirring down.','Confirm contents are below the Max PC Fill (2/3) line. Remove excess before pressure-cooking.']},
+      {title:'5. Pressure-cook the chili',steps:['Cancel Sauté. Attach and lock pressure lid, confirming Sealing.','Pressure Cook on High for 5 minutes.','Allow at least 15 minutes natural release. Vent any remainder gradually only if it does not sputter; otherwise wait longer.','Open the lid once the float valve drops.']},
+      {title:'6. Finish and taste',steps:['Stir well and verify turkey reaches 165°F.','Check consistency: hearty and thick but still plenty brothy.','Mash about ½ cup of beans to thicken, or add unsalted broth if too thick.','If needed, simmer on Sauté for 5–10 minutes, stirring frequently.','Add lime juice and chopped cilantro; adjust salt-free spices to taste.']},
+      {title:'7. Portion for meal prep',steps:['Divide chili into individual meal containers.','Refrigerate in shallow containers within 2 hours.','Keep the next 3–4 days of portions refrigerated.','Freeze remaining portions for best quality within 2–3 months.']}
+    ];
+    const demo=()=>({title:'Smoky Three-Bean Turkey Chili',sections:template.map(group=>({id:makeId(),title:group.title,collapsed:false,steps:group.steps.map(text=>({id:makeId(),text,done:false}))}))});
+    function load(){try{const raw=localStorage.getItem(STORAGE_KEY);if(raw){const val=JSON.parse(raw);if(val&&typeof val.title==='string'&&Array.isArray(val.sections))return val;}}catch(e){}return demo()}
+    let data=load(),toastTimer;
+    function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(data));return true}catch(e){showToast('Unable to save in this browser. Check Safari storage settings.');return false}}
+    function showToast(message){const t=el('toast');t.textContent=message;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2700)}
+    function allSteps(){return data.sections.flatMap(s=>s.steps)}
+    const checkedSvg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>';
+    function render(){
+      const list=allSteps(),completed=list.filter(s=>s.done).length,total=list.length,percent=total?Math.round(completed/total*100):0;
+      el('recipeTitle').textContent=data.title||'Your recipe, one step at a time.';
+      el('progressCount').textContent=`${completed} of ${total} steps complete`;
+      el('progressPercent').textContent=percent+'%';el('progressFill').style.width=percent+'%';el('progressMeter').setAttribute('aria-valuenow',String(percent));
+      el('remaining').textContent=total?`${total-completed} left`:'No steps yet';
+      el('progressStatus').textContent=total&&completed===total?'Recipe complete. Nice work!':completed?'Keep that momentum':'Ready when you are';
+      el('sectionLabel').textContent=`Your checklist · ${data.sections.length} ${data.sections.length===1?'section':'sections'}`;
+      el('resetButton').disabled=!completed;
+      el('expandButton').textContent=data.sections.length&&data.sections.every(s=>s.collapsed)?'Expand all sections':'Collapse all sections';
+      const container=el('sections');container.replaceChildren();
+      if(!total){const empty=document.createElement('div');empty.className='empty';empty.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16M4 12h16M4 18h10"/></svg><h2>Your blank canvas</h2><p>Paste any recipe or to-do list and we\'ll turn it into a beautiful progress tracker.</p>';const btn=document.createElement('button');btn.type='button';btn.className='button';btn.textContent='Paste your first steps';btn.onclick=openImport;empty.appendChild(btn);container.appendChild(empty);return}
+      const nextId=list.find(s=>!s.done)?.id;
+      for(let i=0;i<data.sections.length;i++){
+        const section=data.sections[i],count=section.steps.filter(s=>s.done).length;
+        const card=document.createElement('section');card.className='phase'+(section.collapsed?' collapsed':'')+(count===section.steps.length?' done':'');
+        const head=document.createElement('button');head.className='phase-head';head.type='button';head.setAttribute('aria-expanded',String(!section.collapsed));
+        const num=document.createElement('span');num.className='phase-num';num.textContent=count===section.steps.length?'✓':String(i+1);head.appendChild(num);
+        const meta=document.createElement('span');meta.className='phase-meta';const name=document.createElement('div');name.className='phase-name';name.textContent=section.title;const small=document.createElement('div');small.className='phase-count';small.textContent=`${count} of ${section.steps.length} complete`;meta.append(name,small);head.appendChild(meta);
+        const chev=document.createElement('svg');chev.setAttribute('viewBox','0 0 24 24');chev.setAttribute('class','icon phase-chevron');chev.innerHTML='<path d="m6 9 6 6 6-6"/>';head.appendChild(chev);head.addEventListener('click',()=>{section.collapsed=!section.collapsed;save();render()});card.appendChild(head);
+        const content=document.createElement('div');content.className='phase-content';
+        for(const step of section.steps){
+          const label=document.createElement('label');label.className='step'+(step.done?' completed':'');
+          const input=document.createElement('input');input.type='checkbox';input.checked=!!step.done;input.setAttribute('aria-label',step.text);input.addEventListener('change',()=>{step.done=input.checked;save();render()});
+          const check=document.createElement('span');check.className='check';check.innerHTML=checkedSvg;
+          const span=document.createElement('span');span.className='step-text';span.textContent=step.text;
+          label.append(input,check,span);if(step.id===nextId){const badge=document.createElement('span');badge.className='current-indicator';badge.textContent='Next';label.append(badge)}content.appendChild(label)
+        }
+        card.appendChild(content);container.appendChild(card)
+      }
+    }
+    function normalize(text){return text.replace(/\*\*/g,'').replace(/^\s*[-*+]\s*\[[xX ]\]\s*/,'').replace(/^\s*\[[xX ]\]\s*/,'').replace(/^\s*[-*•–]\s+/,'').replace(/^\s*\d{1,3}[.)]\s+/,'').replace(/^\s*☐\s*/,'').trim()}
+    function parse(text){
+      const sections=[];let current=null;
+      const addSection=(title)=>{current={id:makeId(),title,collapsed:false,steps:[]};sections.push(current)};
+      for(const raw of text.replace(/\r/g,'').split('\n')){
+        let line=raw.trim();if(!line||/^```/.test(line)||/^---+$/.test(line))continue;
+        const h=line.match(/^#{1,6}\s+(.+)$/);
+        const numberedHeader=line.match(/^(?:\*\*)?\s*(?:stage|phase|part|section)\s+\d+\s*[:.·—–-]?\s*.+/i);
+        const uppercaseHeader=/^[A-Z][A-Z\s&/]{5,70}:?$/.test(line);
+        if(h||numberedHeader||uppercaseHeader){addSection((h?h[1]:line).replace(/\*\*/g,'').trim());continue}
+        line=normalize(line);
+        if(!line||/^https?:\/\//i.test(line))continue;
+        if(!current)addSection('Cooking steps');
+        current.steps.push({id:makeId(),text:line,done:false});
+      }
+      return sections.filter(s=>s.steps.length)
+    }
+    function openImport(){el('nameInput').value=data.title==='Your recipe, one step at a time.'?'':data.title;el('pasteInput').value='';updatePreview();el('importDialog').showModal()}
+    function updatePreview(){const count=parse(el('pasteInput').value).reduce((sum,section)=>sum+section.steps.length,0);el('importPreview').textContent=count?`${count} steps detected · ready to import`:'Paste your steps to see how many will be imported.';el('importButton').disabled=!count}
+    function commitImport(){const sections=parse(el('pasteInput').value);if(!sections.length){showToast('Paste at least one cooking step first.');return}
+      if(allSteps().some(s=>s.done)&&!confirm('Replace your current checklist and its progress?'))return;
+      data={title:el('nameInput').value.trim()||'My cooking checklist',sections};save();render();el('importDialog').close();window.scrollTo({top:0,behavior:'smooth'});showToast('New checklist ready!')}
+    el('editTop').addEventListener('click',openImport);el('editBottom').addEventListener('click',openImport);el('closeDialog').addEventListener('click',()=>el('importDialog').close());el('pasteInput').addEventListener('input',updatePreview);el('importButton').addEventListener('click',commitImport);
+    el('demoButton').addEventListener('click',()=>{if(allSteps().some(s=>s.done)&&!confirm('Replace your current checklist and its progress with the chili example?'))return;data=demo();save();render();el('importDialog').close();window.scrollTo({top:0,behavior:'smooth'});showToast('Chili recipe loaded')});
+    el('clearButton').addEventListener('click',()=>{if(!confirm('Delete the checklist and all its progress on this device?'))return;data={title:'Your recipe, one step at a time.',sections:[]};save();render();el('importDialog').close();showToast('Checklist cleared')});
+    el('resetButton').addEventListener('click',()=>{if(!confirm('Uncheck every step and start this recipe over?'))return;allSteps().forEach(s=>s.done=false);save();render();showToast('Progress reset')});
+    el('expandButton').addEventListener('click',()=>{const expand=data.sections.every(s=>s.collapsed);data.sections.forEach(s=>s.collapsed=!expand);save();render()});
+    el('addStepButton').addEventListener('click',()=>{el('newStepInput').value='';el('addDialog').showModal();el('newStepInput').focus()});
+    const closeAdd=()=>el('addDialog').close();el('closeAdd').addEventListener('click',closeAdd);el('cancelAdd').addEventListener('click',closeAdd);
+    const addStep=()=>{const text=el('newStepInput').value.trim();if(!text)return;if(!data.sections.length)data.sections.push({id:makeId(),title:'Cooking steps',collapsed:false,steps:[]});const last=data.sections[data.sections.length-1];last.steps.push({id:makeId(),text,done:false});last.collapsed=false;save();render();closeAdd();showToast('Step added')};
+    el('saveStep').addEventListener('click',addStep);el('newStepInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();addStep()}});
+    render();if(!localStorage.getItem(STORAGE_KEY))save();
+    // Fully self-contained: no service worker, network calls, accounts, or external assets.
+  })();
+  </script>
+</body>
+</html>
