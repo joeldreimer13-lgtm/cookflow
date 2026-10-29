@@ -7,9 +7,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="CookFlow">
-  <meta name="description" content="Shop by store, check off groceries, and follow your recipes with live progress bars. Your lists save automatically on this device.">
+  <meta name="description" content="Save recipes in folders, search your collection, shop by store, and cook with live progress bars. Your lists save automatically on this device.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232c7158'/%3E%3Cpath d='M13 32 26 44 51 18' stroke='white' stroke-width='7' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-  <title>CookFlow · Shop and cook</title>
+  <title>CookFlow · Recipes, shopping &amp; cooking</title>
   <style>
     :root{--ink:#24312b;--muted:#69746d;--line:#e0e5dd;--cream:#f7f6f0;--white:#fff;--green:#2c7158;--green-dark:#1c5b45;--soft-green:#e7f2e9;--gold:#e9a950;--shadow:0 16px 35px rgba(37,61,43,.065);color-scheme:light}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}button,input,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #b0d5be;outline-offset:2px}button:disabled{cursor:not-allowed;opacity:.5}.hidden{display:none!important}
@@ -30,7 +30,11 @@
     .shop-store-add-form{display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:7px;align-items:center;padding:10px 12px 12px}.shop-store-add-form input{min-width:0;background:#f8faf5;padding:11px 12px}.shop-store-add-form .button{min-height:44px;padding:8px;font-size:22px;border-radius:12px}
     @media(max-width:560px){.shopping-summary{top:6px}.shopping-toggle{padding:15px 13px 12px;gap:9px}.shop-title{font-size:21px}.shop-bag{width:36px;height:40px}.shop-percent{font-size:29px}.shop-chevron{width:16px;height:16px}.shopping-meter{margin-left:14px;margin-right:14px}.shopping-body{padding:15px 10px 11px}.shop-quick-add{grid-template-columns:minmax(0,1fr) auto}.shop-quick-add input{grid-column:1/-1}.shop-quick-add .button{padding:10px 17px}.shop-select{font-size:16px}.shop-icon-button{width:36px;min-width:36px}.shop-item-list{padding-left:5px;padding-right:4px}.shop-item-label{gap:9px;padding-left:5px;padding-right:3px}.shop-item-text{font-size:15px}.shop-feedback{font-size:11px}.shopping-panel{margin-bottom:25px}.shop-tools{gap:0}.shop-tools .button{padding-left:8px;padding-right:8px}.shop-store-add-form{padding-left:10px;padding-right:10px}}
     .transfer-panel{margin-top:23px;padding:15px 17px;border:1px solid var(--line);border-radius:16px;background:#fff}.transfer-panel summary{cursor:pointer;font-size:14px;font-weight:750;color:var(--green);min-height:28px}.transfer-panel p{font-size:13px;line-height:1.65;color:var(--muted);margin:12px 0}.transfer-actions{display:flex;gap:8px;flex-wrap:wrap}.native-app #transferPanel{display:none}.transfer-status{font-size:12px;color:var(--muted);line-height:1.5;min-height:18px;margin-top:10px}
+    .backup-file-control{position:relative;overflow:hidden;cursor:pointer}.backup-file-control input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer}.backup-file-control:focus-within{outline:3px solid #b0d5be;outline-offset:2px}
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
+    .recipe-library{border:1px solid var(--line);border-radius:21px;background:#fff;box-shadow:var(--shadow);margin:0 0 22px;overflow:hidden}.library-toggle{width:100%;border:0;background:white;color:var(--ink);padding:17px 18px;display:flex;gap:12px;align-items:center;text-align:left}.library-mark{width:39px;height:39px;display:grid;place-items:center;background:var(--soft-green);color:var(--green);border-radius:12px;flex:none}.library-title{font-size:20px;letter-spacing:-.5px;font-weight:850;display:block}.library-subtitle{font-size:12px;color:var(--muted);display:block;margin-top:4px}.library-toggle-copy{flex:1}.library-toggle[aria-expanded=false]>.icon{transform:rotate(-90deg)}.library-body{border-top:1px solid #edf0e9;padding:17px}.library-body[hidden]{display:none}.library-search{position:relative}.library-search>.icon{position:absolute;left:13px;top:15px;color:#798b7d}.library-search input{width:100%;min-height:48px;border:1px solid #cfd8ce;border-radius:13px;background:#f8faf6;padding:12px 42px 12px 40px;color:var(--ink);font-size:16px;outline:none}.library-search input:focus{border-color:#559c74;box-shadow:0 0 0 3px #e1f1e5}.library-clear{position:absolute;right:5px;top:5px;width:38px;height:38px;border:0;border-radius:10px;background:transparent;color:var(--muted);font-size:22px}.library-tools{display:flex;gap:7px;justify-content:space-between;align-items:center;margin-top:11px;flex-wrap:wrap}.library-tools .button{min-height:40px}.library-folders{display:flex;overflow-x:auto;gap:7px;padding:13px 1px 9px;scrollbar-width:thin}.folder-chip{border:1px solid #e0e7dc;border-radius:99px;padding:9px 13px;white-space:nowrap;background:#f7f9f3;color:#647161;font-size:13px;min-height:39px}.folder-chip[aria-pressed=true]{border-color:var(--green);background:var(--green);color:#fff}.folder-chip .folder-count{font-size:11px;opacity:.75;margin-left:6px}.library-feedback{display:flex;gap:9px;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);line-height:1.5;min-height:33px;margin:0 0 9px}.library-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.recipe-card{border:1px solid var(--line);border-radius:16px;padding:15px;min-width:0;display:flex;flex-direction:column;gap:10px;background:#fff}.recipe-card.is-current{background:#f7faf4;border-color:#b7ceb8}.recipe-card-folder{font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:#798570;display:flex;align-items:center;gap:7px;overflow-wrap:anywhere}.recipe-card h3{font-size:17px;line-height:1.3;margin:0;letter-spacing:-.3px;overflow-wrap:anywhere}.recipe-card-meta{font-size:12px;color:var(--muted);margin-top:auto}.recipe-card-meter{height:4px;overflow:hidden;border-radius:10px;background:#e8eee2}.recipe-card-meter span{display:block;height:100%;background:#85ad86}.recipe-card-actions{display:flex;gap:8px;align-items:center;justify-content:space-between}.recipe-card-actions>.button{flex:1;min-height:41px}.recipe-more{width:42px;height:41px;border:0;border-radius:11px;background:#f0f3ec;color:var(--green);font-size:21px}.library-empty{grid-column:1/-1;border:1px dashed #ccd8c4;background:#fafcf8;border-radius:15px;padding:23px 18px;text-align:center}.library-empty h3{margin:0 0 8px;font-size:17px}.library-empty p{margin:0 0 13px;font-size:13px;line-height:1.6;color:var(--muted)}.recipe-save-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;flex-wrap:wrap}.recipe-save-status{font-size:12px;color:var(--green);line-height:1.5}.folder-manager-list{display:grid;gap:8px;margin-top:15px}.folder-manager-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 13px;border:1px solid var(--line);border-radius:13px}.folder-manager-row strong{font-size:15px;overflow-wrap:anywhere}.folder-manager-row small{display:block;color:var(--muted);font-size:12px;margin-top:4px}.folder-create-form{display:flex;gap:8px;align-items:center;margin-top:15px}.folder-create-form input{min-width:0}.library-error{color:#a23c33;font-size:13px;line-height:1.5;margin-top:10px}.recipe-details-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.recipe-details-actions .button{flex:1}.library-current-badge{font-size:10px;font-weight:750;color:var(--green);background:#e4efde;border-radius:5px;padding:4px 5px;white-space:nowrap}.library-result-count{font-size:12px;color:var(--muted)}
+    @media(max-width:560px){.library-grid{grid-template-columns:1fr}.library-body{padding:14px 12px}.library-toggle{padding:15px 13px}.library-title{font-size:20px}.library-tools .button{font-size:12px;padding-left:10px;padding-right:10px}.recipe-card{padding:14px}.recipe-save-row .button{font-size:12px}.folder-create-form .button{padding-left:13px;padding-right:13px}}
+
   </style>
 </head>
 <body>
@@ -40,8 +44,23 @@
         <div class="mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" style="width:24px;height:24px"><path d="m5 12 4 4L19 6"/></svg></div>
         <div><div class="brand-title">Cook<span>Flow</span></div><div class="micro">Kitchen companion</div></div>
       </div>
-      <button class="button secondary small" id="editTop" type="button"><svg class="icon" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L9 17l-4 1 1-4Z"/></svg> Paste steps</button>
+      <button class="button secondary small" id="editTop" type="button"><svg class="icon" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L9 17l-4 1 1-4Z"/></svg> New recipe</button>
     </header>
+
+    <section class="recipe-library" id="recipeLibrary" aria-label="Recipe library">
+      <button type="button" class="library-toggle" id="libraryToggle" aria-expanded="true" aria-controls="libraryBody">
+        <span class="library-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M4 4h7a3 3 0 0 1 3 3v14a4 4 0 0 0-4-2H4V4Zm16 0h-3a3 3 0 0 0-3 3M20 4v15h-2"/></svg></span>
+        <span class="library-toggle-copy"><span class="library-title">My recipes</span><span class="library-subtitle" id="librarySummary">Saved recipes, all in one place</span></span>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <div class="library-body" id="libraryBody">
+        <div class="library-search"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><label for="recipeSearch" class="sr-only">Search saved recipes</label><input type="search" id="recipeSearch" placeholder="Search recipes, ingredients, steps…" autocomplete="off" maxlength="200"><button type="button" id="clearRecipeSearch" class="library-clear hidden" aria-label="Clear recipe search">×</button></div>
+        <div class="library-tools"><span id="libraryResultCount" class="library-result-count" role="status" aria-live="polite"></span><div><button type="button" id="manageRecipeFolders" class="button ghost small">Folders</button><button type="button" id="addLibraryRecipe" class="button secondary small">+ Add recipe</button></div></div>
+        <div class="library-folders" id="libraryFolders" role="group" aria-label="Filter recipes by folder"></div>
+        <div class="library-feedback"><span id="libraryMessage" role="status" aria-live="polite">Recipes and progress save on this device.</span><button type="button" id="libraryUndo" class="button secondary small hidden">Undo</button></div>
+        <div id="libraryResults" class="library-grid"></div>
+      </div>
+    </section>
 
     <section class="shopping-panel" id="shoppingPanel" aria-labelledby="shoppingTitle">
       <div class="shopping-summary">
@@ -68,7 +87,8 @@
     <section class="welcome" aria-labelledby="recipeTitle">
       <p class="eyebrow">Your cooking companion</p>
       <h1 id="recipeTitle">Your recipe, one step at a time.</h1>
-      <p>Big progress from small checkmarks. Everything saves automatically on this device.</p>
+      <p>Big progress from small checkmarks. Pick a saved recipe or add something new.</p>
+      <div class="recipe-save-row"><span class="recipe-save-status" id="activeRecipeSaved"></span><button type="button" class="button secondary small" id="activeRecipeDetails">Recipe details</button></div>
     </section>
 
     <section class="progress-card" aria-label="Cooking progress">
@@ -81,11 +101,10 @@
     <div id="sections"></div>
     <div class="bottom-actions"><button class="button secondary" id="editBottom" type="button">Paste a new recipe</button><button class="button ghost" id="expandButton" type="button">Collapse all sections</button></div>
     <details class="transfer-panel" id="transferPanel"><summary>Move or back up your lists</summary>
-      <p>Save a copy of your shopping list, recipe, and checkmarks. To bring them to the iPhone and Apple Watch companion apps, save the file in Files, then use <strong>Import</strong> in the iPhone companion.</p>
+      <p>Back up your recipe library, folders, shopping list, and checkmarks. To bring them to the iPhone and Apple Watch companion apps, save the file in Files, then use <strong>Import</strong> in the iPhone companion.</p>
       <p>After moving, use the companion app for automatic Watch syncing. This Safari or Home Screen copy stays separate. You can import a companion backup here to move changes back.</p>
-      <div class="transfer-actions"><button type="button" class="button secondary small" id="copyBackup">Copy for companion</button><button type="button" class="button ghost small" id="saveBackup">Save lists</button><button type="button" class="button ghost small" id="importBackup">Import saved lists</button><a class="button secondary small hidden" style="text-decoration:none" id="backupDownloadLink" download="CookFlow-backup.cookflow">Download backup file</a></div>
+      <div class="transfer-actions"><button type="button" class="button secondary small" id="copyBackup">Copy for companion</button><button type="button" class="button ghost small" id="saveBackup">Save lists</button><label class="button ghost small backup-file-control">Import saved lists<input type="file" id="backupFile" aria-label="Import saved lists" accept=".cookflow,.json,application/json"></label><a class="button secondary small hidden" style="text-decoration:none" id="backupDownloadLink" download="CookFlow-backup.cookflow">Download backup file</a></div>
       <textarea id="backupTextArea" class="hidden" aria-label="CookFlow backup text" readonly></textarea>
-      <input type="file" id="backupFile" accept=".cookflow,.json,application/json" hidden>
       <div class="transfer-status" id="backupStatus" role="status" aria-live="polite"></div>
     </details>
     <p class="tip"><strong>iPhone tip:</strong> In Safari, tap Share → Add to Home Screen for quick access. Progress stays in this browser's local storage, not in an online account.</p>
@@ -93,15 +112,16 @@
 
   <dialog id="importDialog" aria-labelledby="modalTitle">
     <div class="modal-content">
-      <div class="modal-top"><div><h2 id="modalTitle">Paste your cooking steps</h2><p>Turn any recipe into an interactive checklist.</p></div><button type="button" class="close" id="closeDialog" aria-label="Close"><svg class="icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+      <div class="modal-top"><div><h2 id="modalTitle">Paste your cooking steps</h2><p>Save a recipe with its own checklist and cooking progress.</p></div><button type="button" class="close" id="closeDialog" aria-label="Close"><svg class="icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
       <label class="field-label" for="nameInput">Recipe name</label>
       <input type="text" id="nameInput" maxlength="100" placeholder="e.g. Sunday meal prep">
-      <label class="field-label" for="pasteInput">Steps — one per line</label>
+      <label class="field-label" for="pasteInput">Ingredients &amp; steps — one per line</label>
       <textarea id="pasteInput" spellcheck="false" placeholder="## Prep ingredients&#10;- Chop the onion&#10;- Rinse the beans&#10;&#10;## Cook&#10;1. Sauté the vegetables&#10;2. Pressure cook for 20 minutes&#10;3. Let pressure release naturally"></textarea>
-      <p class="hint">Supports numbered lists, bullet points, and checkboxes. Use <code>## Section name</code> on a line to group your steps. Plain lines work too. Pasting a new recipe replaces the current checklist.</p>
+      <p class="hint">Supports numbered lists, bullet points, and checkboxes. Use <code>## Section name</code> on a line to group your steps. Plain lines work too. New recipes are saved separately; your other recipes are kept.</p>
+      <label class="field-label" for="recipeImportFolder">Save in folder</label><select class="shop-select" id="recipeImportFolder"></select>
       <div class="import-preview" id="importPreview" role="status">Paste your steps to see how many will be imported.</div>
-      <div class="modal-actions"><button class="button" type="button" id="importButton">Create checklist</button><button class="button secondary" type="button" id="demoButton">Use chili example</button></div>
-      <div class="danger-zone"><p>Everything is stored only on this device.</p><button type="button" id="clearButton" class="button danger small">Clear all</button></div>
+      <div class="modal-actions"><button class="button" type="button" id="importButton">Save recipe</button><button class="button secondary" type="button" id="demoButton">Use chili example</button></div>
+      <div class="danger-zone"><p>Your recipes and folders are saved on this device.</p><button type="button" id="clearButton" class="button secondary small">Close current recipe</button></div>
     </div>
   </dialog>
 
@@ -128,6 +148,28 @@
     <div class="import-preview" id="shoppingPastePreview" role="status">Paste a list to see what will be added.</div>
     <div class="modal-actions"><button type="submit" class="button" id="shoppingPasteSave" disabled>Add to shopping list</button><button type="button" class="button secondary" data-close-shopping="shoppingPasteDialog">Cancel</button></div>
   </form></dialog>
+    <dialog id="recipeDetailsDialog" aria-labelledby="recipeDetailsTitle"><form id="recipeDetailsForm" class="modal-content">
+    <div class="modal-top"><div><h2 id="recipeDetailsTitle">Recipe details</h2><p>Name it and choose a home for it.</p></div><button type="button" class="close" data-close-library="recipeDetailsDialog" aria-label="Close recipe details">✕</button></div>
+    <label class="field-label" for="savedRecipeName">Recipe name</label><input type="text" id="savedRecipeName" required maxlength="100" autocomplete="off">
+    <label class="field-label" for="savedRecipeFolder">Folder</label><select class="shop-select" id="savedRecipeFolder"></select>
+    <p class="library-error hidden" id="recipeDetailsError" role="alert"></p>
+    <div class="modal-actions"><button type="submit" class="button">Save changes</button><button type="button" class="button secondary" data-close-library="recipeDetailsDialog">Cancel</button></div>
+    <div class="recipe-details-actions"><button type="button" class="button ghost small" id="editSavedRecipeSteps">Edit ingredients &amp; steps</button><button type="button" class="button ghost small" id="copySavedRecipe">Save a copy</button></div>
+    <div class="danger-zone"><p>Remove this recipe from your library. You can undo it.</p><button type="button" class="button danger small" id="deleteSavedRecipe">Delete recipe</button></div>
+  </form></dialog>
+  <dialog id="recipeFoldersDialog" aria-labelledby="recipeFoldersTitle"><div class="modal-content">
+    <div class="modal-top"><div><h2 id="recipeFoldersTitle">Your folders</h2><p>Organize recipes your way.</p></div><button type="button" class="close" data-close-library="recipeFoldersDialog" aria-label="Close recipe folders">✕</button></div>
+    <form id="createRecipeFolder" class="folder-create-form"><label for="newRecipeFolder" class="sr-only">New folder name</label><input type="text" id="newRecipeFolder" maxlength="80" placeholder="e.g. Meal prep or Salads" autocomplete="off" required><button type="submit" class="button">Add folder</button></form>
+    <p class="library-error hidden" id="recipeFolderError" role="alert"></p><div id="recipeFolderList" class="folder-manager-list"></div>
+  </div></dialog>
+  <dialog id="editRecipeFolderDialog" aria-labelledby="editRecipeFolderTitle"><form id="editRecipeFolderForm" class="modal-content">
+    <div class="modal-top"><div><h2 id="editRecipeFolderTitle">Edit folder</h2><p>Keep your collection easy to find.</p></div><button type="button" class="close" data-close-library="editRecipeFolderDialog" aria-label="Close folder editor">✕</button></div>
+    <label class="field-label" for="editRecipeFolderName">Folder name</label><input type="text" id="editRecipeFolderName" maxlength="80" required autocomplete="off"><p class="library-error hidden" id="editRecipeFolderError" role="alert"></p>
+    <div class="modal-actions"><button type="submit" class="button">Save folder</button><button type="button" class="button secondary" data-close-library="editRecipeFolderDialog">Cancel</button></div>
+    <div class="danger-zone"><p>Removing a folder moves its recipes to Unfiled. Recipes are kept.</p><button type="button" id="removeRecipeFolder" class="button danger small">Remove folder</button></div>
+  </form></dialog>
+
+  <dialog id="backupImportDialog" aria-labelledby="backupImportTitle"><div class="modal-content"><div class="modal-top"><div><h2 id="backupImportTitle">Import your backup?</h2><p>This replaces your recipe library, folders, shopping list, and checkmarks. Save a backup of your current data first if needed.</p></div><button type="button" class="close" id="closeBackupImport" aria-label="Cancel backup import">✕</button></div><p id="backupImportError" class="library-error hidden" role="alert"></p><div class="modal-actions"><button type="button" class="button" id="confirmBackupImport">Import backup</button><button type="button" class="button secondary" id="cancelBackupImport">Cancel</button></div></div></dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script>
@@ -148,7 +190,7 @@
     const demo=()=>({title:'Smoky Three-Bean Turkey Chili',sections:template.map(group=>({id:makeId(),title:group.title,collapsed:false,steps:group.steps.map(text=>({id:makeId(),text,done:false}))}))});
     function load(){try{const raw=localStorage.getItem(STORAGE_KEY);if(raw){const val=JSON.parse(raw);if(val&&typeof val.title==='string'&&Array.isArray(val.sections))return val;}}catch(e){}return demo()}
     let data=load(),toastTimer;
-    function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(data));window.CookFlowNative?.changed?.();return true}catch(e){if(window.CookFlowNative?.isNative){window.CookFlowNative.changed?.();return true}showToast('Unable to save in this browser. Check Safari storage settings.');return false}}
+    function save(){if(window.CookFlowNative?.persistRecipeChange)return window.CookFlowNative.persistRecipeChange(data);try{localStorage.setItem(STORAGE_KEY,JSON.stringify(data));window.CookFlowNative?.changed?.();return true}catch(e){if(window.CookFlowNative?.isNative){window.CookFlowNative.changed?.();return true}showToast('Unable to save in this browser. Check Safari storage settings.');return false}}
     function showToast(message){const t=el('toast');t.textContent=message;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2700)}
     function allSteps(){return data.sections.flatMap(s=>s.steps)}
     const checkedSvg='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>';
@@ -163,7 +205,7 @@
       el('resetButton').disabled=!completed;
       el('expandButton').textContent=data.sections.length&&data.sections.every(s=>s.collapsed)?'Expand all sections':'Collapse all sections';
       const container=el('sections');container.replaceChildren();
-      if(!total){const empty=document.createElement('div');empty.className='empty';empty.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16M4 12h16M4 18h10"/></svg><h2>Your blank canvas</h2><p>Paste any recipe or to-do list and we\'ll turn it into a beautiful progress tracker.</p>';const btn=document.createElement('button');btn.type='button';btn.className='button';btn.textContent='Paste your first steps';btn.onclick=openImport;empty.appendChild(btn);container.appendChild(empty);return}
+      if(!total){const empty=document.createElement('div');empty.className='empty';empty.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16M4 12h16M4 18h10"/></svg><h2>Your blank canvas</h2><p>Paste any recipe or to-do list and we\'ll turn it into a beautiful progress tracker.</p>';const btn=document.createElement('button');btn.type='button';btn.className='button';btn.textContent='Paste your first steps';btn.onclick=()=>openImport();empty.appendChild(btn);container.appendChild(empty);return}
       const nextId=list.find(s=>!s.done)?.id;
       for(let i=0;i<data.sections.length;i++){
         const section=data.sections[i],count=section.steps.filter(s=>s.done).length;
@@ -200,14 +242,20 @@
       }
       return sections.filter(s=>s.steps.length)
     }
-    function openImport(){el('nameInput').value=data.title==='Your recipe, one step at a time.'?'':data.title;el('pasteInput').value='';updatePreview();el('importDialog').showModal()}
-    function updatePreview(){const count=parse(el('pasteInput').value).reduce((sum,section)=>sum+section.steps.length,0);el('importPreview').textContent=count?`${count} steps detected · ready to import`:'Paste your steps to see how many will be imported.';el('importButton').disabled=!count}
-    function commitImport(){const sections=parse(el('pasteInput').value);if(!sections.length){showToast('Paste at least one cooking step first.');return}
-      if(allSteps().some(s=>s.done)&&!confirm('Replace your current checklist and its progress?'))return;
-      data={title:el('nameInput').value.trim()||'My cooking checklist',sections};save();render();el('importDialog').close();window.scrollTo({top:0,behavior:'smooth'});showToast('New checklist ready!')}
-    el('editTop').addEventListener('click',openImport);el('editBottom').addEventListener('click',openImport);el('closeDialog').addEventListener('click',()=>el('importDialog').close());el('pasteInput').addEventListener('input',updatePreview);el('importButton').addEventListener('click',commitImport);
-    el('demoButton').addEventListener('click',()=>{if(allSteps().some(s=>s.done)&&!confirm('Replace your current checklist and its progress with the chili example?'))return;data=demo();save();render();el('importDialog').close();window.scrollTo({top:0,behavior:'smooth'});showToast('Chili recipe loaded')});
-    el('clearButton').addEventListener('click',()=>{if(!confirm('Delete the checklist and all its progress on this device?'))return;data={title:'Your recipe, one step at a time.',sections:[]};save();render();el('importDialog').close();showToast('Checklist cleared')});
+    let editingRecipeId=null;
+    function openImport(recipe=null,id=null,folderId=null){
+      editingRecipeId=id;el('modalTitle').textContent=id?'Edit your recipe':'Add a recipe';
+      el('nameInput').value=recipe?.title||'';el('pasteInput').value=recipe?recipe.sections.map(section=>'## '+section.title+'\n'+section.steps.map(step=>'- '+step.text).join('\n')).join('\n\n'):'';
+      window.CookFlowNative.populateRecipeFolders?.(el('recipeImportFolder'),folderId??window.CookFlowNative.selectedRecipeFolder?.());updatePreview();el('importDialog').showModal();
+    }
+    function updatePreview(){const count=parse(el('pasteInput').value).reduce((sum,section)=>sum+section.steps.length,0);el('importPreview').textContent=count?`${count} steps detected · ready to save`:'Paste your ingredients and steps to see how many will be saved.';el('importButton').disabled=!count}
+    function commitImport(){const sections=parse(el('pasteInput').value);if(!sections.length)return;
+      try{window.CookFlowNative.commitRecipeImport({title:el('nameInput').value.trim()||'My cooking checklist',sections},editingRecipeId,el('recipeImportFolder').value);el('importDialog').close();el('recipeTitle').scrollIntoView({behavior:'smooth',block:'start'});showToast('Recipe saved to My recipes')}
+      catch(error){el('importPreview').textContent=error.message;showToast(error.message)}
+    }
+    el('editTop').addEventListener('click',()=>openImport());el('editBottom').addEventListener('click',()=>openImport());el('closeDialog').addEventListener('click',()=>el('importDialog').close());el('pasteInput').addEventListener('input',updatePreview);el('importButton').addEventListener('click',commitImport);
+    el('demoButton').addEventListener('click',()=>{try{window.CookFlowNative.commitRecipeImport(demo(),null,el('recipeImportFolder').value);el('importDialog').close();el('recipeTitle').scrollIntoView({behavior:'smooth',block:'start'});showToast('Chili example saved')}catch(error){showToast(error.message)}});
+    el('clearButton').addEventListener('click',()=>{try{window.CookFlowNative.closeCurrentRecipe();el('importDialog').close()}catch(error){showToast(error.message)}});
     el('resetButton').addEventListener('click',()=>{if(!confirm('Uncheck every step and start this recipe over?'))return;allSteps().forEach(s=>s.done=false);save();render();showToast('Progress reset')});
     el('expandButton').addEventListener('click',()=>{const expand=data.sections.every(s=>s.collapsed);data.sections.forEach(s=>s.collapsed=!expand);save();render()});
     el('addStepButton').addEventListener('click',()=>{el('newStepInput').value='';el('addDialog').showModal();el('newStepInput').focus()});
@@ -216,6 +264,8 @@
     el('saveStep').addEventListener('click',addStep);el('newStepInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();addStep()}});
     window.CookFlowNative=window.CookFlowNative||{};
     window.CookFlowNative.recipeSnapshot=()=>data;
+    window.CookFlowNative.openRecipeEditor=(recipe=null,id=null,folderId=null)=>openImport(recipe,id,folderId);
+    window.CookFlowNative.showToast=showToast;
     window.CookFlowNative.applyRecipe=value=>{data=value;render()};
     render();try{if(!localStorage.getItem(STORAGE_KEY))save()}catch(e){}
     // Fully self-contained: no service worker, network calls, accounts, or external assets.
@@ -370,9 +420,119 @@
   <script>
   (()=>{
     'use strict';
+    const api=window.CookFlowNative=window.CookFlowNative||{},KEY='cookflow-library-v1',UI_KEY='cookflow-library-ui-v1';
+    const el=id=>document.getElementById(id),clone=value=>JSON.parse(JSON.stringify(value));
+    const uid=()=>Math.random().toString(36).slice(2,10)+Date.now().toString(36),now=()=>Date.now()/1000;
+    const clean=text=>String(text).trim().replace(/\s+/g,' '),fold=text=>String(text).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase();
+    const emptyLibrary=()=>({version:1,activeRecipeId:null,folders:[],recipes:[]});
+    const countSteps=recipe=>recipe.sections.flatMap(section=>section.steps);
+    function validRecipe(value,sharedIDs=null){
+      if(!value||typeof value.title!=='string'||value.title.length>1000||!Array.isArray(value.sections)||value.sections.length>2000)throw Error('This recipe could not be read.');
+      const ids=sharedIDs||new Set();let count=0;const id=value=>{if(typeof value!=='string'||!value||value.length>128||ids.has(value))throw Error('A recipe has missing or duplicate identifiers.');ids.add(value)};
+      for(const section of value.sections){id(section.id);if(typeof section.title!=='string'||section.title.length>1000||typeof section.collapsed!=='boolean'||!Array.isArray(section.steps))throw Error('A recipe section is invalid.');for(const step of section.steps){id(step.id);if(typeof step.text!=='string'||!step.text||step.text.length>30000||typeof step.done!=='boolean')throw Error('A recipe step is invalid.');count++}}
+      if(count>30000)throw Error('This recipe is too large.');return value;
+    }
+    function migrate(recipe){const value=emptyLibrary();if(countSteps(recipe).length){const id='legacy-current-recipe';value.activeRecipeId=id;value.recipes.push({id,folderId:null,recipe:clone(recipe),createdAt:0,updatedAt:0})}return value}
+    function validateLibrary(value,recipe=api.recipeSnapshot()){
+      if(value==null)return migrate(recipe);
+      if(value.version!==1||!Array.isArray(value.folders)||!Array.isArray(value.recipes)||value.folders.length>200||value.recipes.length>1000)throw Error('This recipe library is too large or needs a newer CookFlow version.');
+      const folders=new Set(),recipes=new Set(),recipeItems=new Set();
+      for(const folder of value.folders){if(!folder||typeof folder.id!=='string'||!folder.id||folder.id.length>128||folders.has(folder.id)||typeof folder.name!=='string'||!folder.name.trim()||folder.name.length>80)throw Error('A recipe folder is invalid.');folders.add(folder.id)}
+      for(const saved of value.recipes){if(!saved||typeof saved.id!=='string'||!saved.id||saved.id.length>128||recipes.has(saved.id)||(saved.folderId!=null&&!folders.has(saved.folderId))||!Number.isFinite(saved.createdAt)||!Number.isFinite(saved.updatedAt))throw Error('A saved recipe is invalid.');recipes.add(saved.id);validRecipe(saved.recipe,recipeItems)}
+      if(value.activeRecipeId!=null&&!recipes.has(value.activeRecipeId))throw Error('The current saved recipe could not be found.');
+      return clone({...value,activeRecipeId:value.activeRecipeId??null,recipes:value.recipes.map(saved=>({...saved,folderId:saved.folderId??null}))});
+    }
+    let loadFailed=false,library;
+    try{const raw=localStorage.getItem(KEY);library=validateLibrary(raw?JSON.parse(raw):(api.isNative?api.bridgeBaseline?.library:null));if(!raw)localStorage.setItem(KEY,JSON.stringify(library))}
+    catch(error){library=library||migrate(api.recipeSnapshot());loadFailed=true}
+    let selectedFolder='all',expanded=true,editingId=null,editingFolderId=null,undoState=null,internalCommit=false;
+    try{const ui=JSON.parse(localStorage.getItem(UI_KEY)||'{}');expanded=ui.expanded!==false;if(ui.folder==='unfiled'||library.folders.some(folder=>folder.id===ui.folder))selectedFolder=ui.folder}catch(_){}
+    const folderName=id=>library.folders.find(folder=>folder.id===id)?.name||'Unfiled';
+    const active=()=>library.recipes.find(saved=>saved.id===library.activeRecipeId);
+    function message(text,error=false){el('libraryMessage').textContent=text;el('libraryMessage').style.color=error?'#a23c33':''}
+    function feedbackError(id,error){el(id).textContent=error.message||String(error);el(id).classList.remove('hidden')}
+    function rememberUI(){try{localStorage.setItem(UI_KEY,JSON.stringify({expanded,folder:selectedFolder}))}catch(_){} }
+    function clearUndo(){undoState=null;el('libraryUndo').classList.add('hidden')}
+    function commit(next,recipe,text,undoable=false){
+      if(loadFailed)throw Error('Your saved recipes could not be opened. Import a valid CookFlow backup before changing the library.');
+      const previous=undoable?{library:clone(library),recipe:clone(api.recipeSnapshot())}:null;
+      internalCommit=true;
+      try{api.applyState({recipe:clone(recipe),shopping:api.shoppingSnapshot(),library:validateLibrary(next,recipe)});api.changed()}
+      finally{internalCommit=false}
+      clearUndo();if(previous){undoState=previous;el('libraryUndo').classList.remove('hidden')}if(text)message(text);
+    }
+    function action(work){try{work()}catch(error){message(error.message,true);api.showToast?.(error.message)}}
+    function setFolder(id){selectedFolder=id;rememberUI();render()}
+    function makeButton(text,className,click,label){const button=document.createElement('button');button.type='button';button.className=className;button.textContent=text;if(label)button.setAttribute('aria-label',label);button.addEventListener('click',click);return button}
+    function populateFolders(select,value=null){select.replaceChildren(new Option('Unfiled',''));for(const folder of library.folders)select.add(new Option(folder.name,folder.id));select.value=value||''}
+    function renderFolders(){
+      const container=el('libraryFolders');container.replaceChildren();
+      const definitions=[{id:'all',name:'All recipes',count:library.recipes.length},{id:'unfiled',name:'Unfiled',count:library.recipes.filter(saved=>!saved.folderId).length},...library.folders.map(folder=>({id:folder.id,name:folder.name,count:library.recipes.filter(saved=>saved.folderId===folder.id).length}))];
+      for(const folder of definitions){const button=makeButton(folder.name,'folder-chip',()=>setFolder(folder.id));button.setAttribute('aria-pressed',String(selectedFolder===folder.id));const badge=document.createElement('span');badge.className='folder-count';badge.textContent=folder.count;button.appendChild(badge);container.appendChild(button)}
+    }
+    function renderResults(){
+      const search=fold(el('recipeSearch').value.trim()),terms=search.split(/\s+/).filter(Boolean),container=el('libraryResults');container.replaceChildren();el('clearRecipeSearch').classList.toggle('hidden',!search);
+      const matches=library.recipes.filter(saved=>{
+        if(selectedFolder==='unfiled'&&saved.folderId)return false;
+        if(!['all','unfiled'].includes(selectedFolder)&&saved.folderId!==selectedFolder)return false;
+        const text=fold([saved.recipe.title,folderName(saved.folderId),...saved.recipe.sections.flatMap(section=>[section.title,...section.steps.map(step=>step.text)])].join(' '));return terms.every(term=>text.includes(term));
+      }).sort((a,b)=>b.updatedAt-a.updatedAt||a.recipe.title.localeCompare(b.recipe.title));
+      el('libraryResultCount').textContent=`${matches.length} ${matches.length===1?'recipe':'recipes'}${search?' found':''}`;
+      if(!matches.length){const box=document.createElement('div');box.className='library-empty';const title=document.createElement('h3');title.textContent=search?'No matching recipes':library.recipes.length?'This folder is ready for recipes':'Your recipe collection starts here';const hint=document.createElement('p');hint.textContent=search?'Try another name or ingredient, or look in all your folders.':'Paste a recipe to save its ingredients and steps. You can come back to it anytime.';box.append(title,hint);if(selectedFolder!=='all')box.appendChild(makeButton('Show all recipes','button secondary small',()=>{el('recipeSearch').value='';setFolder('all')}));else box.appendChild(makeButton('+ Add a recipe','button secondary small',()=>api.openRecipeEditor()));container.appendChild(box);return}
+      for(const saved of matches){const current=saved.id===library.activeRecipeId,steps=countSteps(saved.recipe),done=steps.filter(step=>step.done).length,percent=steps.length?Math.round(done/steps.length*100):0;const card=document.createElement('article');card.className='recipe-card'+(current?' is-current':'');
+        const folder=document.createElement('div');folder.className='recipe-card-folder';folder.textContent=folderName(saved.folderId);if(current){const badge=document.createElement('span');badge.className='library-current-badge';badge.textContent='Now cooking';folder.appendChild(badge)}
+        const title=document.createElement('h3');title.textContent=saved.recipe.title;const meta=document.createElement('div');meta.className='recipe-card-meta';meta.textContent=`${done} of ${steps.length} steps · ${percent}% complete`;const meter=document.createElement('div');meter.className='recipe-card-meter';meter.setAttribute('aria-hidden','true');const fill=document.createElement('span');fill.style.width=percent+'%';meter.appendChild(fill);
+        const actions=document.createElement('div');actions.className='recipe-card-actions';actions.append(makeButton(current?'Continue cooking':done?'Resume recipe':'Cook recipe','button secondary small',()=>action(()=>openRecipe(saved.id)),`Open recipe ${saved.recipe.title}`),makeButton('•••','recipe-more',()=>openDetails(saved.id),`Recipe details for ${saved.recipe.title}`));card.append(folder,title,meta,meter,actions);container.appendChild(card);
+      }
+    }
+    function renderFolderManager(){const list=el('recipeFolderList');list.replaceChildren();for(const folder of library.folders){const row=document.createElement('div');row.className='folder-manager-row';const info=document.createElement('div'),title=document.createElement('strong'),count=document.createElement('small');title.textContent=folder.name;const total=library.recipes.filter(saved=>saved.folderId===folder.id).length;count.textContent=`${total} ${total===1?'recipe':'recipes'}`;info.append(title,count);row.append(info,makeButton('Edit','button secondary small',()=>{editingFolderId=folder.id;el('editRecipeFolderName').value=folder.name;el('editRecipeFolderError').classList.add('hidden');el('recipeFoldersDialog').close();el('editRecipeFolderDialog').showModal()},`Edit folder ${folder.name}`));list.appendChild(row)}if(!library.folders.length){const hint=document.createElement('p');hint.className='hint';hint.textContent='Try folders like Meal prep, Breakfast, Salads, or Favorites.';list.appendChild(hint)}}
+    function render(){
+      if(!['all','unfiled'].includes(selectedFolder)&&!library.folders.some(folder=>folder.id===selectedFolder))selectedFolder='all';
+      el('librarySummary').textContent=`${library.recipes.length} saved ${library.recipes.length===1?'recipe':'recipes'} · ${library.folders.length} ${library.folders.length===1?'folder':'folders'}`;el('libraryToggle').setAttribute('aria-expanded',String(expanded));el('libraryBody').hidden=!expanded;
+      const current=active();el('activeRecipeSaved').textContent=current?`Saved in ${folderName(current.folderId)} · progress saves automatically`:'Add a recipe to save it in your library.';el('activeRecipeDetails').disabled=!current;
+      renderFolders();renderResults();renderFolderManager();
+    }
+    function openRecipe(id){const saved=library.recipes.find(recipe=>recipe.id===id);if(!saved)return;const next=clone(library);next.activeRecipeId=id;commit(next,saved.recipe,`Opened ${saved.recipe.title}. Your progress is saved.`);el('recipeTitle').scrollIntoView({behavior:'smooth',block:'start'})}
+    function openDetails(id){const saved=library.recipes.find(recipe=>recipe.id===id);if(!saved)return;editingId=id;el('savedRecipeName').value=saved.recipe.title;populateFolders(el('savedRecipeFolder'),saved.folderId);el('recipeDetailsError').classList.add('hidden');el('recipeDetailsDialog').showModal()}
+    function preserveSteps(previous,next){
+      const usedSections=new Set();for(const section of next.sections){const old=previous.sections.find(value=>value.title===section.title&&!usedSections.has(value.id));if(!old)continue;usedSections.add(old.id);section.id=old.id;section.collapsed=old.collapsed;const usedSteps=new Set();for(const step of section.steps){const match=old.steps.find(value=>value.text===step.text&&!usedSteps.has(value.id));if(match){usedSteps.add(match.id);step.id=match.id;step.done=match.done}}}return next;
+    }
+    api.validateLibrary=validateLibrary;api.librarySnapshot=()=>clone(library);api.populateRecipeFolders=populateFolders;
+    api.selectedRecipeFolder=()=>library.folders.some(folder=>folder.id===selectedFolder)?selectedFolder:null;
+    api.applyLibrary=value=>{library=validateLibrary(value);loadFailed=false;if(!internalCommit)clearUndo();render()};
+    api.persistRecipeChange=recipe=>{
+      try{const next=clone(library);let record=next.recipes.find(saved=>saved.id===next.activeRecipeId);if(!record&&countSteps(recipe).length){record={id:uid(),folderId:null,recipe:clone(recipe),createdAt:now(),updatedAt:now()};next.recipes.push(record);next.activeRecipeId=record.id}if(record){record.recipe=clone(recipe);record.updatedAt=now()}commit(next,recipe);return true}catch(error){message(error.message,true);api.showToast?.(error.message);return false}
+    };
+    api.commitRecipeImport=(recipe,id,folderId)=>{
+      const next=clone(library),existing=next.recipes.find(saved=>saved.id===id),timestamp=now();validRecipe(recipe);
+      if(existing){existing.recipe=preserveSteps(existing.recipe,clone(recipe));existing.folderId=folderId||null;existing.updatedAt=timestamp;recipe=existing.recipe;next.activeRecipeId=existing.id}
+      else{const saved={id:uid(),folderId:folderId||null,recipe:clone(recipe),createdAt:timestamp,updatedAt:timestamp};next.recipes.push(saved);next.activeRecipeId=saved.id}
+      commit(next,recipe,'Recipe saved. Reopen it anytime from My recipes.');return true;
+    };
+    api.closeCurrentRecipe=()=>{const next=clone(library);next.activeRecipeId=null;commit(next,{title:'Your recipe, one step at a time.',sections:[]},'Your saved recipes are kept in My recipes.')};
+    el('libraryToggle').addEventListener('click',()=>{expanded=!expanded;el('libraryToggle').setAttribute('aria-expanded',String(expanded));el('libraryBody').hidden=!expanded;rememberUI()});
+    el('recipeSearch').addEventListener('input',renderResults);el('clearRecipeSearch').addEventListener('click',()=>{el('recipeSearch').value='';renderResults();el('recipeSearch').focus()});
+    el('addLibraryRecipe').addEventListener('click',()=>api.openRecipeEditor());el('activeRecipeDetails').addEventListener('click',()=>openDetails(library.activeRecipeId));
+    el('manageRecipeFolders').addEventListener('click',()=>{el('newRecipeFolder').value='';el('recipeFolderError').classList.add('hidden');renderFolderManager();el('recipeFoldersDialog').showModal()});
+    document.querySelectorAll('[data-close-library]').forEach(button=>button.addEventListener('click',()=>el(button.dataset.closeLibrary).close()));
+    el('createRecipeFolder').addEventListener('submit',event=>{event.preventDefault();try{const name=clean(el('newRecipeFolder').value);if(!name)return;if(library.folders.some(folder=>fold(folder.name)===fold(name)))throw Error('That folder already exists.');const next=clone(library);next.folders.push({id:uid(),name});commit(next,api.recipeSnapshot(),'Folder added. Choose it when saving a recipe.');el('newRecipeFolder').value='';el('recipeFolderError').classList.add('hidden');el('newRecipeFolder').focus()}catch(error){feedbackError('recipeFolderError',error)}});
+    el('editRecipeFolderForm').addEventListener('submit',event=>{event.preventDefault();try{const name=clean(el('editRecipeFolderName').value);if(!name)return;if(library.folders.some(folder=>folder.id!==editingFolderId&&fold(folder.name)===fold(name)))throw Error('That folder already exists.');const next=clone(library),folder=next.folders.find(folder=>folder.id===editingFolderId);if(!folder)return;folder.name=name;commit(next,api.recipeSnapshot(),'Folder renamed.');el('editRecipeFolderDialog').close();el('recipeFoldersDialog').showModal()}catch(error){feedbackError('editRecipeFolderError',error)}});
+    el('removeRecipeFolder').addEventListener('click',()=>action(()=>{const next=clone(library);next.folders=next.folders.filter(folder=>folder.id!==editingFolderId);next.recipes.forEach(saved=>{if(saved.folderId===editingFolderId)saved.folderId=null});commit(next,api.recipeSnapshot(),'Folder removed. Its recipes are in Unfiled.',true);el('editRecipeFolderDialog').close()}));
+    el('recipeDetailsForm').addEventListener('submit',event=>{event.preventDefault();try{const name=clean(el('savedRecipeName').value);if(!name)return;const next=clone(library),saved=next.recipes.find(saved=>saved.id===editingId);if(!saved)return;saved.recipe.title=name;saved.folderId=el('savedRecipeFolder').value||null;saved.updatedAt=now();commit(next,saved.id===next.activeRecipeId?saved.recipe:api.recipeSnapshot(),'Recipe details saved.');el('recipeDetailsDialog').close()}catch(error){feedbackError('recipeDetailsError',error)}});
+    el('editSavedRecipeSteps').addEventListener('click',()=>{const saved=library.recipes.find(saved=>saved.id===editingId);if(!saved)return;el('recipeDetailsDialog').close();api.openRecipeEditor(saved.recipe,saved.id,saved.folderId)});
+    el('copySavedRecipe').addEventListener('click',()=>action(()=>{const source=library.recipes.find(saved=>saved.id===editingId);if(!source)return;const next=clone(library),recipe=clone(source.recipe),timestamp=now();recipe.title=clean(el('savedRecipeName').value)||source.recipe.title;recipe.title=recipe.title.slice(0,93)+' (copy)';for(const section of recipe.sections){section.id=uid();section.steps.forEach(step=>{step.id=uid();step.done=false})}const saved={id:uid(),folderId:el('savedRecipeFolder').value||null,recipe,createdAt:timestamp,updatedAt:timestamp};next.recipes.push(saved);commit(next,api.recipeSnapshot(),'A fresh copy was saved to your library.');el('recipeDetailsDialog').close()}));
+    el('deleteSavedRecipe').addEventListener('click',()=>action(()=>{const next=clone(library);next.recipes=next.recipes.filter(saved=>saved.id!==editingId);let recipe=api.recipeSnapshot();if(next.activeRecipeId===editingId){const replacement=[...next.recipes].sort((a,b)=>b.updatedAt-a.updatedAt)[0];next.activeRecipeId=replacement?.id||null;recipe=replacement?.recipe||{title:'Your recipe, one step at a time.',sections:[]}}commit(next,recipe,'Recipe removed. Tap Undo to restore it.',true);el('recipeDetailsDialog').close()}));
+    el('libraryUndo').addEventListener('click',()=>action(()=>{if(!undoState)return;const value=undoState;commit(value.library,value.recipe,'Restored your recipe library.')}));
+    render();if(loadFailed)message('Could not save or read the recipe library. Your current checklist is kept. Check device storage or import a backup.',true);
+  })();
+
+  </script>
+  <script>
+  (()=>{
+    'use strict';
     const api=window.CookFlowNative=window.CookFlowNative||{};
     const el=id=>document.getElementById(id);
-    api.getState=()=>JSON.parse(JSON.stringify({recipe:api.recipeSnapshot(),shopping:api.shoppingSnapshot()}));
+    api.getState=()=>JSON.parse(JSON.stringify({recipe:api.recipeSnapshot(),shopping:api.shoppingSnapshot(),library:api.librarySnapshot()}));
     api.changed=()=>{if(!api.applying)window.dispatchEvent(new Event('cookflow-change'))};
     function validateState(state){
       if(!state||typeof state.recipe?.title!=='string'||!Array.isArray(state.recipe.sections)||state.shopping?.version!==1||!Array.isArray(state.shopping.stores))throw new Error('Choose a valid CookFlow backup.');
@@ -381,25 +541,25 @@
       for(const section of state.recipe.sections){id(section.id,recipeIDs);if(typeof section.title!=='string'||!Array.isArray(section.steps))throw new Error('This file has an invalid cooking section.');for(const step of section.steps){id(step.id,recipeIDs);if(typeof step.text!=='string'||!step.text||typeof step.done!=='boolean')throw new Error('This file has an invalid cooking step.');stepCount++}}
       for(const store of state.shopping.stores){id(store.id,shoppingIDs);if(typeof store.name!=='string'||!store.name.trim()||!Array.isArray(store.items))throw new Error('This file has an invalid store.');for(const item of store.items){id(item.id,shoppingIDs);if(typeof item.text!=='string'||!item.text||typeof item.done!=='boolean')throw new Error('This file has an invalid shopping item.');itemCount++}}
       if(state.recipe.sections.length>2000||state.shopping.stores.length>2000||stepCount>30000||itemCount>30000)throw new Error('This backup is too large.');
-      return state;
+      state.library=api.validateLibrary(state.library,state.recipe);return state;
     }
     api.applyState=(incoming,replace=false)=>{
       const state=validateState(incoming);
       const focused=document.activeElement?.id;
-      const drafts=replace?[]:[...document.querySelectorAll('input[type=text],textarea,select')].filter(field=>field.id).map(field=>({id:field.id,value:field.value,start:field.selectionStart,end:field.selectionEnd}));
+      const drafts=replace?[]:[...document.querySelectorAll('input[type=text],input[type=search],textarea,select')].filter(field=>field.id).map(field=>({id:field.id,value:field.value,start:field.selectionStart,end:field.selectionEnd}));
       if(replace)document.querySelectorAll('dialog[open]').forEach(dialog=>dialog.close());
       api.applying=true;
       try{
-        let oldRecipe,oldShopping;
-        try{oldRecipe=localStorage.getItem('cookflow-recipe-v1');oldShopping=localStorage.getItem('cookflow-shopping-v1');localStorage.setItem('cookflow-recipe-v1',JSON.stringify(state.recipe));localStorage.setItem('cookflow-shopping-v1',JSON.stringify(state.shopping))}
-        catch(error){if(!api.isNative){try{oldRecipe===null?localStorage.removeItem('cookflow-recipe-v1'):localStorage.setItem('cookflow-recipe-v1',oldRecipe);oldShopping===null?localStorage.removeItem('cookflow-shopping-v1'):localStorage.setItem('cookflow-shopping-v1',oldShopping)}catch(_){}throw new Error('Your browser could not save this import. Your current lists were kept.')}}
-        api.applyRecipe(state.recipe);api.applyShopping(state.shopping);api.bridgeBaseline=JSON.parse(JSON.stringify(state));
+        let oldRecipe,oldShopping,oldLibrary;
+        try{oldRecipe=localStorage.getItem('cookflow-recipe-v1');oldShopping=localStorage.getItem('cookflow-shopping-v1');oldLibrary=localStorage.getItem('cookflow-library-v1');localStorage.setItem('cookflow-recipe-v1',JSON.stringify(state.recipe));localStorage.setItem('cookflow-shopping-v1',JSON.stringify(state.shopping));localStorage.setItem('cookflow-library-v1',JSON.stringify(state.library))}
+        catch(error){if(!api.isNative){try{oldRecipe===null?localStorage.removeItem('cookflow-recipe-v1'):localStorage.setItem('cookflow-recipe-v1',oldRecipe);oldShopping===null?localStorage.removeItem('cookflow-shopping-v1'):localStorage.setItem('cookflow-shopping-v1',oldShopping);oldLibrary===null?localStorage.removeItem('cookflow-library-v1'):localStorage.setItem('cookflow-library-v1',oldLibrary)}catch(_){}throw new Error('Your browser could not save this import. Your current lists were kept.')}}
+        api.applyRecipe(state.recipe);api.applyShopping(state.shopping);api.applyLibrary(state.library);api.bridgeBaseline=JSON.parse(JSON.stringify(state));
         for(const draft of drafts){const field=el(draft.id);if(!field)continue;if(field.tagName!=='SELECT'||[...field.options].some(option=>option.value===draft.value))field.value=draft.value;if(field.id===focused){field.focus({preventScroll:true});if(draft.start!==null&&typeof field.setSelectionRange==='function')field.setSelectionRange(draft.start,draft.end)}}
         return true;
       }finally{api.applying=false}
     };
-    let backupUrl=null;
-    const backupText=()=>JSON.stringify({format:'cookflow-backup',schemaVersion:1,exportedAt:Date.now()/1000,...validateState(api.getState())},null,2);
+    let backupUrl=null,pendingBackup=null;
+    const backupText=()=>JSON.stringify({format:'cookflow-backup',schemaVersion:2,exportedAt:Date.now()/1000,...validateState(api.getState())},null,2);
     el('copyBackup').addEventListener('click',async()=>{
       try{const text=backupText();let copied=false;
         if(navigator.clipboard?.writeText){try{await navigator.clipboard.writeText(text);copied=true}catch(_){}}
@@ -411,10 +571,11 @@
       try{const text=backupText();if(backupUrl)URL.revokeObjectURL(backupUrl);const file=new Blob([text],{type:'application/json'});backupUrl=URL.createObjectURL(file);const link=el('backupDownloadLink');link.href=backupUrl;link.classList.remove('hidden');el('backupStatus').textContent='Backup prepared. Tap Download backup file, save it in Files, then import it in the iPhone companion.';
       }catch(error){el('backupStatus').textContent=error.message}
     });
-    el('importBackup').addEventListener('click',()=>el('backupFile').click());
+    const cancelBackupImport=()=>{pendingBackup=null;el('backupImportDialog').close()};el('closeBackupImport').addEventListener('click',cancelBackupImport);el('cancelBackupImport').addEventListener('click',cancelBackupImport);
+    el('confirmBackupImport').addEventListener('click',()=>{try{if(!pendingBackup)return;api.applyState(pendingBackup,true);pendingBackup=null;api.changed();el('backupStatus').textContent='Your recipes, folders, lists, and checkmarks were imported.'}catch(error){el('backupImportError').textContent=error.message;el('backupImportError').classList.remove('hidden')}});
     el('backupFile').addEventListener('change',async event=>{
       const file=event.target.files?.[0];if(!file)return;
-      try{if(file.size>5*1024*1024)throw new Error('Choose a CookFlow backup smaller than 5 MB.');const backup=JSON.parse(await file.text());if(backup.format!=='cookflow-backup'||backup.schemaVersion!==1)throw new Error('This is not a supported CookFlow backup.');const state=validateState({recipe:backup.recipe,shopping:backup.shopping});if(!confirm('Replace your current shopping list, recipe, and checkmarks with this backup?'))return;api.applyState(state,true);api.changed();el('backupStatus').textContent='Your saved lists and checkmarks were imported.'}
+      try{if(file.size>5*1024*1024)throw new Error('Choose a CookFlow backup smaller than 5 MB.');const backup=JSON.parse(await file.text());if(backup.format!=='cookflow-backup'||![1,2].includes(backup.schemaVersion))throw new Error('This is not a supported CookFlow backup.');const state=validateState({recipe:backup.recipe,shopping:backup.shopping,library:backup.library});pendingBackup=state;el('backupImportError').classList.add('hidden');el('backupImportDialog').showModal()}
       catch(error){el('backupStatus').textContent=error.message||'This file could not be imported.'}finally{event.target.value=''}
     });
   })();

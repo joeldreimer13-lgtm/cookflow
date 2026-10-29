@@ -2,6 +2,19 @@
 
 CookFlow has an iPhone companion containing the complete offline shopping and cooking interface, and a native Watch app with store lists, cooking sections, checkboxes, counts, and percentage bars.
 
+## Recipes, folders, and search
+
+Open **My recipes** in CookFlow. Use **+ Add recipe** to paste ingredients and steps, name the recipe, choose a folder, and save. Search matches recipe names, section names, ingredients, steps, and folder names; folder chips narrow the results.
+
+- The existing current checklist is adopted into **Unfiled** with its checkmarks intact.
+- Each recipe keeps its own progress. Open another recipe and return whenever you like.
+- **Folders** creates and renames folders. Removing a folder keeps its recipes in Unfiled.
+- A recipe's **•••** menu renames or moves it, edits its steps, saves a fresh copy, or deletes it with Undo.
+- Backups now include the entire library and folders. Version 1 backups still import and become one saved recipe. Version 2 backups require this updated app.
+- The native iPhone app keeps the library in its saved state. The Watch receives the current recipe and grocery list; queued Watch changes can still update an archived recipe after the phone opens another one.
+
+The Safari/Home Screen website updates when reloaded. An already installed native app must be rebuilt/installed from this updated Xcode project (version 1.1); GitHub Pages cannot update a signed native app.
+
 ## What is ready
 
 - An Xcode project with an iPhone app and an embedded, single-target watchOS app.
